@@ -2,187 +2,130 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111111">
-  <title>Global Jaya Motor - Bengkel Service Motor Profesional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>Global Jaya Motor - Bengkel Batam</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3774/3774083.png">
 </head>
 <body>
-  <header>
-    <div class="logo">🔧 GLOBAL JAYA MOTOR</div>
-    <nav>
-      <a href="#layanan">Layanan</a>
-      <a href="#paket">Paket Servis</a>
-      <a href="#booking">Booking</a>
-    </nav>
-    <a class="btn-wa-header" href="https://wa.me/6283879387000">WA Bengkel</a>
-  </header>
 
-  <!-- HERO BENGKEL -->
-  <section class="hero-bengkel">
-    <div class="hero-text">
-      <span class="badge">🔥 BUKA SETIAP HARI 08.00 - 21.00</span>
-      <h1>Servis Motor Cepat, <br>Garansi Mesin Halus</h1>
-      <p>Spesialis Matic, Injeksi & Motor Harian. Teknisi bersertifikat, sparepart original, 30 menit selesai.</p>
-      <div class="cta">
-        <a class="btn-primary" href="#booking">📅 Booking Servis Sekarang</a>
-        <button class="btn-outline" id="installBtn" style="display:none;">📲 Install Aplikasi Bengkel</button>
-      </div>
-      <div class="stats">
-        <div><b>2.341+</b><span>Motor Diservis</span></div>
-        <div><b>4.9/5</b><span>Rating Google</span></div>
-        <div><b>30'</b><span>Estimasi Servis</span></div>
-      </div>
-    </div>
-    <div class="hero-img">
-      <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=800" alt="Bengkel Motor">
-      <div class="antrian-card">
-        <p>Antrian Hari Ini</p>
-        <h2 id="antrian">03 Motor</h2>
-        <small>Update live - Estimasi 45 menit</small>
-      </div>
-    </div>
-  </section>
+<!-- HEADER MELENGKUNG -->
+<header class="header-rounded">
+  <div class="logo-area">
+    <img src="logo.png" alt="Logo" class="logo-foto" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3774/3774083.png'">
+    <span>GLOBAL JAYA MOTOR</span>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</header>
 
-  <!-- LAYANAN UTAMA -->
-  <section id="layanan" class="section">
-    <h2>Layanan Unggulan Kami</h2>
-    <div class="grid-4">
-      <div class="service-card"><div class="icon">🛢️</div><h4>Ganti Oli</h4><p>Oli MPX, Yamalube, Motul Original</p><span>Mulai 45rb</span></div>
-      <div class="service-card"><div class="icon">⚙️</div><h4>Servis CVT</h4><p>Bongkar total, bersihkan, greasing</p><span>Mulai 85rb</span></div>
-      <div class="service-card"><div class="icon">💉</div><h4>Servis Injeksi</h4><p>Infus injektor + scan ECU</p><span>Mulai 95rb</span></div>
-      <div class="service-card"><div class="icon">🛞</div><h4>Ganti Ban & Rem</h4><p>Press velg, ganti kampas, balancing</p><span>Mulai 35rb</span></div>
-      <div class="service-card"><div class="icon">🔋</div><h4>Kelistrikan</h4><p>Aki, lampu, starter, kabel body</p><span>Mulai 25rb</span></div>
-      <div class="service-card"><div class="icon">🧰</div><h4>Tune Up Lengkap</h4><p>Mesin kembali seperti baru</p><span>Mulai 150rb</span></div>
-    </div>
-  </section>
+<!-- MENU LACI DARI BAWAH HEADER -->
+<div class="drawer-overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-handle"></div>
+  <a href="#beranda" onclick="closeDrawer()">🏠 Beranda</a>
+  <a href="#galery" onclick="closeDrawer()">🖼️ Galery</a>
+  <a href="#layanan" onclick="closeDrawer()">🛠️ Layanan</a>
+  <a href="#testimoni" onclick="closeDrawer()">⭐ Testimoni</a>
+  <a href="#tentang" onclick="closeDrawer()">ℹ️ Tentang Kami</a>
+  <a href="#hubungi" onclick="closeDrawer()">📞 Hubungi</a>
+  <button id="installBtn" style="display:none;">📲 Install Aplikasi</button>
+</div>
 
-  <!-- PAKET SERVIS -->
-  <section id="paket" class="section bg-dark">
-    <h2 style="color:#fff;">Paket Hemat Bulanan</h2>
-    <p style="color:#aaa; margin-bottom:24px;">Paling laris di Batam</p>
-    <div class="paket-grid">
-      <div class="paket">
-        <h3>PAKET RINGAN</h3>
-        <div class="harga">Rp 85<span>rb</span></div>
-        <ul>
-          <li>✓ Ganti Oli Mesin</li>
-          <li>✓ Cek CVT & Rantai</li>
-          <li>✓ Cek Rem & Ban</li>
-          <li>✓ Cuci Motor</li>
-        </ul>
-        <button onclick="booking('Paket Ringan')">Pilih Paket</button>
-      </div>
-      <div class="paket popular">
-        <div class="label-popular">PALING LARIS</div>
-        <h3>PAKET LENGKAP</h3>
-        <div class="harga">Rp 165<span>rb</span></div>
-        <ul>
-          <li>✓ Semua Paket Ringan</li>
-          <li>✓ Servis CVT Lengkap</li>
-          <li>✓ Infus Injeksi</li>
-          <li>✓ Gratis Ganti Oli Gardan</li>
-          <li>✓ Garansi 7 Hari</li>
-        </ul>
-        <button onclick="booking('Paket Lengkap')">Pilih Paket</button>
-      </div>
-      <div class="paket">
-        <h3>PAKET OVERHAUL</h3>
-        <div class="harga">Rp 450<span>rb</span></div>
-        <ul>
-          <li>✓ Bongkar Mesin Total</li>
-          <li>✓ Skir Klep & Piston</li>
-          <li>✓ Ganti Seal Lengkap</li>
-          <li>✓ Garansi 30 Hari</li>
-        </ul>
-        <button onclick="booking('Paket Overhaul')">Pilih Paket</button>
-      </div>
-    </div>
-  </section>
+<!-- BANNER BACKGROUND - UPLOAD banner.jpg di repo -->
+<section id="beranda" class="banner">
+  <div class="banner-overlay">
+    <h1>🏍️ Global Jaya Motor</h1>
+    <h2>Bengkel Service Motor Terpercaya Batam</h2>
+  </div>
+</section>
 
-  <!-- FORM BOOKING -->
-  <section id="booking" class="section">
-    <div class="booking-box">
-      <div>
-        <h2>Booking Servis Online</h2>
-        <p>Isi form, datang langsung tanpa antri. Teknisi kami siap.</p>
-        <div class="info-bengkel">
-          <p>📍 Jl. Raya Batam Center No.88 - Belakang SPBU</p>
-          <p>⏰ 08.00 - 21.00 WIB (Minggu Tetap Buka)</p>
-          <p>📞 0838-7938-7000</p>
-        </div>
-      </div>
-      <form id="formBooking" onsubmit="kirimBooking(event)">
-        <input type="text" id="nama" placeholder="Nama Anda" required>
-        <input type="text" id="motor" placeholder="Tipe Motor (ex: Beat 2022)" required>
-        <select id="layananPilih" required>
-          <option value="">Pilih Layanan</option>
-          <option>Ganti Oli</option>
-          <option>Servis CVT</option>
-          <option>Servis Injeksi</option>
-          <option>Tune Up Lengkap</option>
-          <option>Paket Ringan - 85rb</option>
-          <option>Paket Lengkap - 165rb</option>
-          <option>Paket Overhaul - 450rb</option>
-        </select>
-        <input type="date" id="tanggal" required>
-        <textarea id="keluhan" placeholder="Keluhan motor (ex: tarikan berat, gredek)"></textarea>
-        <button type="submit" class="btn-primary full">Kirim Booking via WA</button>
-      </form>
-    </div>
-  </section>
+<!-- KEUNGGULAN -->
+<section class="keunggulan">
+  <div class="cek-list">
+    <p>✅ Teknisi berpengalaman & terlatih</p>
+    <p>✅ Suku cadang asli & berkualitas terjamin</p>
+    <p>✅ Harga transparan, biaya diperjelas sebelum dikerjakan</p>
+    <p>✅ Pengerjaan cepat & tepat waktu</p>
+    <p>✅ Layanan ramah, nyaman, dan jujur</p>
+  </div>
+</section>
 
-  <footer>
-    <h3>Global Jaya Motor - Bengkel</h3>
-    <p>Spesialis Matic & Injeksi | Sparepart Original | Garansi Servis</p>
-    <small>© 2026 Global Jaya Motor PWA - Offline Ready</small>
-  </footer>
+<!-- DAFTAR LAYANAN 2 KOLOM -->
+<section id="layanan" class="section">
+  <h2 class="judul-section">🛠️ Daftar Layanan Kami</h2>
+  <div class="grid-2">
 
-  <script>
-    // Update antrian random biar hidup
-    const antrianEl = document.getElementById('antrian');
-    setInterval(() => {
-      const n = Math.floor(Math.random() * 4) + 2;
-      antrianEl.textContent = `0${n} Motor`;
-    }, 5000);
+    <div class="box-layanan"><span>🛠️</span><h4>Service Mesin</h4><p>Perawatan dan perbaikan mesin motor agar kembali optimal.</p></div>
+    <div class="box-layanan"><span>⚙️</span><h4>Tune Up</h4><p>Pengecekan dan penyetelan mesin secara menyeluruh.</p></div>
+    <div class="box-layanan"><span>🛢️</span><h4>Ganti Oli</h4><p>Penggantian oli mesin dan pemeriksaan kondisi oli.</p></div>
+    <div class="box-layanan"><span>🔥</span><h4>Service Karburator</h4><p>Membersihkan, menyetel, dan memperbaiki sistem karburator.</p></div>
+    <div class="box-layanan"><span>⚡</span><h4>Kelistrikan Motor</h4><p>Perbaikan kabel, lampu, aki, starter, pengapian, sekring.</p></div>
+    <div class="box-layanan"><span>🔩</span><h4>Piston & Seher</h4><p>Pengecekan, penggantian, dan perbaikan piston/seher.</p></div>
+    <div class="box-layanan"><span>⚙️</span><h4>Bubut & Perbaikan Mesin</h4><p>Pengerjaan komponen mesin yang butuh proses bubut khusus.</p></div>
+    <div class="box-layanan"><span>🛞</span><h4>Ganti Ban</h4><p>Penggantian ban depan/belakang serta pemeriksaan kondisi ban.</p></div>
+    <div class="box-layanan"><span>🔧</span><h4>Service CVT</h4><p>Perawatan dan perbaikan CVT untuk motor matic.</p></div>
+    <div class="box-layanan"><span>⛓️</span><h4>Rantai & Gear</h4><p>Pengecekan, penyetelan, dan penggantian rantai serta gear.</p></div>
+    <div class="box-layanan"><span>🛑</span><h4>Rem Motor</h4><p>Pemeriksaan dan perbaikan rem cakram maupun tromol.</p></div>
+    <div class="box-layanan"><span>🔋</span><h4>Aki & Starter</h4><p>Pengecekan aki, sistem starter elektrik dan starter motor.</p></div>
+    <div class="box-layanan"><span>💡</span><h4>Lampu & Sein</h4><p>Perbaikan lampu utama, rem, sein, klakson.</p></div>
+    <div class="box-layanan"><span>⛽</span><h4>Sistem Bahan Bakar</h4><p>Pemeriksaan dan perbaikan sistem bahan bakar & saluran bensin.</p></div>
+    <div class="box-layanan"><span>🌡️</span><h4>Sistem Pendingin</h4><p>Pengecekan radiator, coolant, kipas, dan pendingin motor.</p></div>
+    <div class="box-layanan"><span>🔊</span><h4>Knalpot</h4><p>Pemeriksaan dan perbaikan masalah pada sistem knalpot.</p></div>
+    <div class="box-layanan"><span>🛵</span><h4>Body & Komponen Motor</h4><p>Perbaikan dan penggantian berbagai komponen & body motor.</p></div>
+    <div class="box-layanan"><span>🔍</span><h4>Cek & Diagnosa Kerusakan</h4><p>Pemeriksaan kondisi motor untuk mengetahui sumber masalah.</p></div>
 
-    // Booking ke WA
-    function booking(paket) {
-      document.getElementById('layananPilih').value = paket;
-      document.getElementById('booking').scrollIntoView({behavior:'smooth'});
-    }
-    function kirimBooking(e) {
-      e.preventDefault();
-      const nama = document.getElementById('nama').value;
-      const motor = document.getElementById('motor').value;
-      const layanan = document.getElementById('layananPilih').value;
-      const tgl = document.getElementById('tanggal').value;
-      const keluhan = document.getElementById('keluhan').value;
-      const pesan = `Halo Global Jaya Motor, mau BOOKING SERVIS:\nNama: ${nama}\nMotor: ${motor}\nLayanan: ${layanan}\nTanggal: ${tgl}\nKeluhan: ${keluhan}`;
-      window.open(`https://wa.me/6283879387000?text=${encodeURIComponent(pesan)}`);
-    }
+  </div>
+</section>
 
-    // PWA Install
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
-    });
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        installBtn.style.display = 'none';
-      }
-    });
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js');
-    }
-  </script>
+<!-- SEGALA KERUSAKAN -->
+<section class="section banner-merah">
+  <h2>🚨 MENERIMA SEGALA JENIS KERUSAKAN MOTOR</h2>
+  <p>Dari kerusakan ringan hingga kerusakan berat. Kami membantu menangani berbagai masalah motor, baik motor matic, bebek, maupun motor manual, sesuai jenis kerusakan dan kebutuhan perbaikan.</p>
+</section>
+
+<!-- GALERY -->
+<section id="galery" class="section">
+  <h2 class="judul-section">🖼️ Galery Bengkel</h2>
+  <div class="galery-grid">
+    <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=600">
+    <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=600">
+    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=600">
+    <img src="https://images.unsplash.com/photo-1580341289255-5a0ddbc1ff48?q=80&w=600">
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section id="testimoni" class="section bg-light">
+  <h2 class="judul-section">⭐ Testimoni Pelanggan</h2>
+  <div class="testi-card"><b>Andi - Beat 2021</b><p>"Servis cepat, motor jadi halus lagi. Harga jelas di awal, jujur. Langganan!"</p><span>⭐⭐⭐⭐⭐</span></div>
+  <div class="testi-card"><b>Siti - NMAX</b><p>"CVT gredek hilang total setelah servis di sini. Teknisi ramah."</p><span>⭐⭐⭐⭐⭐</span></div>
+</section>
+
+<!-- TENTANG & HUBUNGI -->
+<section id="tentang" class="section tentang">
+  <h2>🏍️ GLOBAL JAYA MOTOR</h2>
+  <h3>“Motor Bermasalah? Serahkan Pada Kami!” 🔧</h3>
+  <p>📍 Servis • Perawatan • Perbaikan • Diagnosa<br>🔩 Kerusakan Ringan • Sedang • Berat</p>
+  <p class="alamat">Jl. Raya Batam Center No.88 - Belakang SPBU<br>Buka 08.00 - 21.00 WIB - Minggu Tetap Buka</p>
+  <a class="btn-wa" id="hubungi" href="https://wa.me/6283879387000?text=Halo%20Global%20Jaya%20Motor%2C%20mau%20servis%20motor">📞 Chat WA Bengkel</a>
+</section>
+
+<script>
+const ham = document.getElementById('hamburger');
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('overlay');
+ham.onclick = () => { drawer.classList.add('open'); overlay.classList.add('show'); }
+overlay.onclick = closeDrawer;
+function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('show'); }
+
+// PWA
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js'); }
+let deferredPrompt; const installBtn=document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display='block';});
+installBtn?.addEventListener('click',async()=>{deferredPrompt.prompt();deferredPrompt=null;closeDrawer();});
+</script>
 </body>
-    </html>
+</html>
