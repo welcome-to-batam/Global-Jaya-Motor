@@ -1,29 +1,86 @@
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
-body { background:#fff; color:#222; }
-header { display:flex; justify-content:space-between; align-items:center; padding:16px 6%; background:#111; color:#fff; position:sticky; top:0; z-index:10; }
-.logo { font-weight:800; letter-spacing:1px; color:#ff2a2a; }
-nav a { color:#fff; text-decoration:none; margin-left:18px; font-size:14px; opacity:0.9; }
-.hero { display:flex; flex-wrap:wrap; align-items:center; padding:40px 6%; gap:30px; }
-.hero-text { flex:1; min-width:300px; }
-.hero-text h1 { font-size:38px; line-height:1.1; margin:12px 0; }
-.badge { background:#ffe6e6; color:#d90000; padding:6px 12px; border-radius:20px; font-size:12px; font-weight:700; }
-.hero-text p { color:#555; margin:14px 0 20px; }
-.cta { display:flex; gap:12px; flex-wrap:wrap; }
-.btn-primary { background:#d90000; color:#fff; padding:12px 20px; border-radius:10px; text-decoration:none; font-weight:700; border:none; cursor:pointer; }
-.btn-outline { background:#fff; border:2px solid #111; padding:12px 20px; border-radius:10px; font-weight:700; cursor:pointer; }
-.trust { margin-top:16px; font-size:13px; color:#666; display:flex; gap:8px; }
-.hero-img img { width:100%; max-width:480px; border-radius:20px; }
-.section { padding:40px 6%; }
-.section h2 { margin-bottom:20px; font-size:24px; }
-.bg-light { background:#f7f7f8; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; }
-.motor-card { border:1px solid #eee; border-radius:16px; overflow:hidden; padding:12px; }
-.motor-card img { width:100%; height:160px; object-fit:cover; border-radius:12px; }
-.motor-card h4 { margin:10px 0 4px; }
-.price { color:#d90000; font-weight:800; }
-.motor-card button { margin-top:8px; width:100%; padding:10px; border:none; background:#111; color:#fff; border-radius:8px; font-weight:600; cursor:pointer; }
-.features { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
-.card { background:#fff; padding:18px; border-radius:14px; border:1px solid #eee; }
-footer { background:#111; color:#fff; text-align:center; padding:40px 6%; }
-footer p { color:#aaa; margin:12px 0 20px; }
-footer small { display:block; margin-top:20px; color:#666; }
+/* GLOBAL JAYA MOTOR - MODERN BENGKEL STYLE */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+:root{
+  --red:#ff1a1a;
+  --red-dark:#cc0000;
+  --black:#0f0f0f;
+  --card:#ffffff;
+  --bg:#f6f6f7;
+  --text:#111;
+  --muted:#777;
+  --radius:20px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:99;
+  background:rgba(15,15,15,0.95);backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 5%;border-bottom:1px solid #222;
+}
+.logo{font-weight:800;color:var(--red);letter-spacing:0.5px;font-size:16px}
+nav{display:flex;gap:18px}
+nav a{color:#ddd;text-decoration:none;font-size:14px;font-weight:600}
+nav a:hover{color:#fff}
+.btn-wa-header{
+  background:var(--red);color:#fff;padding:8px 16px;border-radius:999px;
+  text-decoration:none;font-weight:700;font-size:13px;
+}
+
+/* HERO */
+.hero-bengkel{
+  display:grid;grid-template-columns:1.1fr 0.9fr;
+  gap:30px;padding:40px 5%;align-items:center;
+  background:radial-gradient(600px at 20% 10%, #ffeaea, transparent), #fff;
+}
+.badge{
+  display:inline-block;background:#ffe5e5;color:var(--red);
+  padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;
+}
+.hero-text h1{font-size:42px;line-height:0.95;margin:16px 0;letter-spacing:-1px}
+.hero-text p{color:var(--muted);font-size:16px;line-height:1.6;max-width:500px}
+.cta{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.btn-primary{
+  background:var(--red);color:#fff;border:none;padding:14px 22px;
+  border-radius:14px;font-weight:800;text-decoration:none;display:inline-block;
+  box-shadow:0 10px 20px rgba(255,0,0,0.25);cursor:pointer;
+}
+.btn-outline{
+  background:#fff;border:2px solid #111;padding:12px 20px;border-radius:14px;
+  font-weight:700;cursor:pointer;
+}
+.stats{display:flex;gap:20px;margin-top:24px}
+.stats b{display:block;font-size:20px}
+.stats span{font-size:12px;color:var(--muted);font-weight:600}
+
+.hero-img{position:relative}
+.hero-img img{
+  width:100%;height:420px;object-fit:cover;border-radius:24px;
+}
+.antrian-card{
+  position:absolute;left:-10px;bottom:-10px;
+  background:#111;color:#fff;padding:16px 18px;border-radius:16px;
+  box-shadow:0 15px 30px rgba(0,0,0,0.3);min-width:180px;
+}
+.antrian-card p{font-size:12px;color:#aaa}
+.antrian-card h2{color:var(--red);margin:4px 0}
+.antrian-card small{font-size:11px;color:#888}
+
+/* SECTION */
+.section{padding:50px 5%}
+.section h2{font-size:28px;letter-spacing:-0.5px}
+.bg-dark{background:#0f0f0f;color:#fff}
+
+/* LAYANAN */
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:22px}
+.service-card{
+  background:var(--card);border:1px solid #eee;border-radius:var(--radius);
+  padding:18px;transition:0.2s;
+}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,0.08)}
+.service-card .icon{font-size:26px;margin-bottom:8px}
+.service-card h4{font-size:15px;margin-bottom:4
