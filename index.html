@@ -3,84 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#d90000">
-  <title>Global Jaya Motor - Dealer Motor Terpercaya</title>
+  <meta name="theme-color" content="#111111">
+  <title>Global Jaya Motor - Bengkel Service Motor Profesional</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3774/3774083.png">
 </head>
 <body>
   <header>
-    <div class="logo">🏍️ GLOBAL JAYA MOTOR</div>
+    <div class="logo">🔧 GLOBAL JAYA MOTOR</div>
     <nav>
-      <a href="#beranda">Beranda</a>
-      <a href="#stok">Stok Unit</a>
-      <a href="#servis">Servis</a>
-      <a href="#kontak">Kontak</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#paket">Paket Servis</a>
+      <a href="#booking">Booking</a>
     </nav>
+    <a class="btn-wa-header" href="https://wa.me/6283879387000">WA Bengkel</a>
   </header>
 
-  <section id="beranda" class="hero">
+  <!-- HERO BENGKEL -->
+  <section class="hero-bengkel">
     <div class="hero-text">
-      <span class="badge">PROMO AKHIR TAHUN</span>
-      <h1>Motor Impian, <br>Harga Paling Bersaing</h1>
-      <p>Dealer resmi, DP ringan mulai 500rb, Proses 1 jam ACC. Cash & Kredit seluruh Indonesia.</p>
+      <span class="badge">🔥 BUKA SETIAP HARI 08.00 - 21.00</span>
+      <h1>Servis Motor Cepat, <br>Garansi Mesin Halus</h1>
+      <p>Spesialis Matic, Injeksi & Motor Harian. Teknisi bersertifikat, sparepart original, 30 menit selesai.</p>
       <div class="cta">
-        <a class="btn-primary" href="https://wa.me/6283879387000?text=Halo%20Global%20Jaya%20Motor">Chat WA Sekarang</a>
-        <button class="btn-outline" id="installBtn" style="display:none;">📲 Install Aplikasi</button>
+        <a class="btn-primary" href="#booking">📅 Booking Servis Sekarang</a>
+        <button class="btn-outline" id="installBtn" style="display:none;">📲 Install Aplikasi Bengkel</button>
       </div>
-      <div class="trust">
-        <span>⭐ 4.9/5 (2.341 ulasan)</span>
-        <span>•</span>
-        <span>🛡️ Garansi Resmi</span>
+      <div class="stats">
+        <div><b>2.341+</b><span>Motor Diservis</span></div>
+        <div><b>4.9/5</b><span>Rating Google</span></div>
+        <div><b>30'</b><span>Estimasi Servis</span></div>
       </div>
     </div>
     <div class="hero-img">
-      <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800" alt="Motor">
+      <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=800" alt="Bengkel Motor">
+      <div class="antrian-card">
+        <p>Antrian Hari Ini</p>
+        <h2 id="antrian">03 Motor</h2>
+        <small>Update live - Estimasi 45 menit</small>
+      </div>
     </div>
   </section>
 
-  <section id="stok" class="section">
-    <h2>Stok Ready Hari Ini</h2>
-    <div class="grid" id="productList"></div>
-  </section>
-
-  <section id="servis" class="section bg-light">
-    <h2>Layanan Bengkel & Sparepart</h2>
-    <div class="features">
-      <div class="card"><h3>🔧 Servis Rutin</h3><p>Tune up, ganti oli, cek mesin lengkap.</p></div>
-      <div class="card"><h3>⚙️ Sparepart Original</h3><p>100% Original AHM, Yamaha, Suzuki.</p></div>
-      <div class="card"><h3>💳 Bisa Kredit Servis</h3><p>Servis sekarang, bayar bisa dicicil.</p></div>
+  <!-- LAYANAN UTAMA -->
+  <section id="layanan" class="section">
+    <h2>Layanan Unggulan Kami</h2>
+    <div class="grid-4">
+      <div class="service-card"><div class="icon">🛢️</div><h4>Ganti Oli</h4><p>Oli MPX, Yamalube, Motul Original</p><span>Mulai 45rb</span></div>
+      <div class="service-card"><div class="icon">⚙️</div><h4>Servis CVT</h4><p>Bongkar total, bersihkan, greasing</p><span>Mulai 85rb</span></div>
+      <div class="service-card"><div class="icon">💉</div><h4>Servis Injeksi</h4><p>Infus injektor + scan ECU</p><span>Mulai 95rb</span></div>
+      <div class="service-card"><div class="icon">🛞</div><h4>Ganti Ban & Rem</h4><p>Press velg, ganti kampas, balancing</p><span>Mulai 35rb</span></div>
+      <div class="service-card"><div class="icon">🔋</div><h4>Kelistrikan</h4><p>Aki, lampu, starter, kabel body</p><span>Mulai 25rb</span></div>
+      <div class="service-card"><div class="icon">🧰</div><h4>Tune Up Lengkap</h4><p>Mesin kembali seperti baru</p><span>Mulai 150rb</span></div>
     </div>
   </section>
 
-  <footer id="kontak">
-    <h3>Global Jaya Motor</h3>
-    <p>Jl. Raya Batam Center No. 88, Kepulauan Riau<br>Jam Buka: 08.00 - 20.00 WIB</p>
-    <a class="btn-primary" href="https://wa.me/6283879387000">Hubungi Kami</a>
-    <small>© 2026 Global Jaya Motor - PWA Ready</small>
+  <!-- PAKET SERVIS -->
+  <section id="paket" class="section bg-dark">
+    <h2 style="color:#fff;">Paket Hemat Bulanan</h2>
+    <p style="color:#aaa; margin-bottom:24px;">Paling laris di Batam</p>
+    <div class="paket-grid">
+      <div class="paket">
+        <h3>PAKET RINGAN</h3>
+        <div class="harga">Rp 85<span>rb</span></div>
+        <ul>
+          <li>✓ Ganti Oli Mesin</li>
+          <li>✓ Cek CVT & Rantai</li>
+          <li>✓ Cek Rem & Ban</li>
+          <li>✓ Cuci Motor</li>
+        </ul>
+        <button onclick="booking('Paket Ringan')">Pilih Paket</button>
+      </div>
+      <div class="paket popular">
+        <div class="label-popular">PALING LARIS</div>
+        <h3>PAKET LENGKAP</h3>
+        <div class="harga">Rp 165<span>rb</span></div>
+        <ul>
+          <li>✓ Semua Paket Ringan</li>
+          <li>✓ Servis CVT Lengkap</li>
+          <li>✓ Infus Injeksi</li>
+          <li>✓ Gratis Ganti Oli Gardan</li>
+          <li>✓ Garansi 7 Hari</li>
+        </ul>
+        <button onclick="booking('Paket Lengkap')">Pilih Paket</button>
+      </div>
+      <div class="paket">
+        <h3>PAKET OVERHAUL</h3>
+        <div class="harga">Rp 450<span>rb</span></div>
+        <ul>
+          <li>✓ Bongkar Mesin Total</li>
+          <li>✓ Skir Klep & Piston</li>
+          <li>✓ Ganti Seal Lengkap</li>
+          <li>✓ Garansi 30 Hari</li>
+        </ul>
+        <button onclick="booking('Paket Overhaul')">Pilih Paket</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM BOOKING -->
+  <section id="booking" class="section">
+    <div class="booking-box">
+      <div>
+        <h2>Booking Servis Online</h2>
+        <p>Isi form, datang langsung tanpa antri. Teknisi kami siap.</p>
+        <div class="info-bengkel">
+          <p>📍 Jl. Raya Batam Center No.88 - Belakang SPBU</p>
+          <p>⏰ 08.00 - 21.00 WIB (Minggu Tetap Buka)</p>
+          <p>📞 0838-7938-7000</p>
+        </div>
+      </div>
+      <form id="formBooking" onsubmit="kirimBooking(event)">
+        <input type="text" id="nama" placeholder="Nama Anda" required>
+        <input type="text" id="motor" placeholder="Tipe Motor (ex: Beat 2022)" required>
+        <select id="layananPilih" required>
+          <option value="">Pilih Layanan</option>
+          <option>Ganti Oli</option>
+          <option>Servis CVT</option>
+          <option>Servis Injeksi</option>
+          <option>Tune Up Lengkap</option>
+          <option>Paket Ringan - 85rb</option>
+          <option>Paket Lengkap - 165rb</option>
+          <option>Paket Overhaul - 450rb</option>
+        </select>
+        <input type="date" id="tanggal" required>
+        <textarea id="keluhan" placeholder="Keluhan motor (ex: tarikan berat, gredek)"></textarea>
+        <button type="submit" class="btn-primary full">Kirim Booking via WA</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <h3>Global Jaya Motor - Bengkel</h3>
+    <p>Spesialis Matic & Injeksi | Sparepart Original | Garansi Servis</p>
+    <small>© 2026 Global Jaya Motor PWA - Offline Ready</small>
   </footer>
 
   <script>
-    // Data produk
-    const dataMotor = [
-      { nama: "Honda Beat CBS", harga: "18.700.000", img: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=600" },
-      { nama: "Yamaha NMAX 155", harga: "32.500.000", img: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=600" },
-      { nama: "Honda Vario 160", harga: "27.800.000", img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=600" },
-    ];
-    const list = document.getElementById('productList');
-    dataMotor.forEach(m => {
-      list.innerHTML += `
-        <div class="motor-card">
-          <img src="${m.img}">
-          <h4>${m.nama}</h4>
-          <p class="price">Rp ${m.harga}</p>
-          <button onclick="window.open('https://wa.me/6283879387000?text=Mau%20cek%20${m.nama}')">Cek DP</button>
-        </div>
-      `;
-    });
+    // Update antrian random biar hidup
+    const antrianEl = document.getElementById('antrian');
+    setInterval(() => {
+      const n = Math.floor(Math.random() * 4) + 2;
+      antrianEl.textContent = `0${n} Motor`;
+    }, 5000);
 
-    // PWA Install Prompt
+    // Booking ke WA
+    function booking(paket) {
+      document.getElementById('layananPilih').value = paket;
+      document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+    }
+    function kirimBooking(e) {
+      e.preventDefault();
+      const nama = document.getElementById('nama').value;
+      const motor = document.getElementById('motor').value;
+      const layanan = document.getElementById('layananPilih').value;
+      const tgl = document.getElementById('tanggal').value;
+      const keluhan = document.getElementById('keluhan').value;
+      const pesan = `Halo Global Jaya Motor, mau BOOKING SERVIS:\nNama: ${nama}\nMotor: ${motor}\nLayanan: ${layanan}\nTanggal: ${tgl}\nKeluhan: ${keluhan}`;
+      window.open(`https://wa.me/6283879387000?text=${encodeURIComponent(pesan)}`);
+    }
+
+    // PWA Install
     let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -96,11 +180,9 @@
         installBtn.style.display = 'none';
       }
     });
-
-    // Register SW
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }
   </script>
 </body>
-  </html>
+    </html>
