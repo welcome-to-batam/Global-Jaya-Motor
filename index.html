@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#d90000">
+  <title>Global Jaya Motor - Dealer Motor Terpercaya</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3774/3774083.png">
+</head>
+<body>
+  <header>
+    <div class="logo">🏍️ GLOBAL JAYA MOTOR</div>
+    <nav>
+      <a href="#beranda">Beranda</a>
+      <a href="#stok">Stok Unit</a>
+      <a href="#servis">Servis</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+  </header>
+
+  <section id="beranda" class="hero">
+    <div class="hero-text">
+      <span class="badge">PROMO AKHIR TAHUN</span>
+      <h1>Motor Impian, <br>Harga Paling Bersaing</h1>
+      <p>Dealer resmi, DP ringan mulai 500rb, Proses 1 jam ACC. Cash & Kredit seluruh Indonesia.</p>
+      <div class="cta">
+        <a class="btn-primary" href="https://wa.me/6283879387000?text=Halo%20Global%20Jaya%20Motor">Chat WA Sekarang</a>
+        <button class="btn-outline" id="installBtn" style="display:none;">📲 Install Aplikasi</button>
+      </div>
+      <div class="trust">
+        <span>⭐ 4.9/5 (2.341 ulasan)</span>
+        <span>•</span>
+        <span>🛡️ Garansi Resmi</span>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800" alt="Motor">
+    </div>
+  </section>
+
+  <section id="stok" class="section">
+    <h2>Stok Ready Hari Ini</h2>
+    <div class="grid" id="productList"></div>
+  </section>
+
+  <section id="servis" class="section bg-light">
+    <h2>Layanan Bengkel & Sparepart</h2>
+    <div class="features">
+      <div class="card"><h3>🔧 Servis Rutin</h3><p>Tune up, ganti oli, cek mesin lengkap.</p></div>
+      <div class="card"><h3>⚙️ Sparepart Original</h3><p>100% Original AHM, Yamaha, Suzuki.</p></div>
+      <div class="card"><h3>💳 Bisa Kredit Servis</h3><p>Servis sekarang, bayar bisa dicicil.</p></div>
+    </div>
+  </section>
+
+  <footer id="kontak">
+    <h3>Global Jaya Motor</h3>
+    <p>Jl. Raya Batam Center No. 88, Kepulauan Riau<br>Jam Buka: 08.00 - 20.00 WIB</p>
+    <a class="btn-primary" href="https://wa.me/6283879387000">Hubungi Kami</a>
+    <small>© 2026 Global Jaya Motor - PWA Ready</small>
+  </footer>
+
+  <script>
+    // Data produk
+    const dataMotor = [
+      { nama: "Honda Beat CBS", harga: "18.700.000", img: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=600" },
+      { nama: "Yamaha NMAX 155", harga: "32.500.000", img: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=600" },
+      { nama: "Honda Vario 160", harga: "27.800.000", img: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=600" },
+    ];
+    const list = document.getElementById('productList');
+    dataMotor.forEach(m => {
+      list.innerHTML += `
+        <div class="motor-card">
+          <img src="${m.img}">
+          <h4>${m.nama}</h4>
+          <p class="price">Rp ${m.harga}</p>
+          <button onclick="window.open('https://wa.me/6283879387000?text=Mau%20cek%20${m.nama}')">Cek DP</button>
+        </div>
+      `;
+    });
+
+    // PWA Install Prompt
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      }
+    });
+
+    // Register SW
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+  </html>
