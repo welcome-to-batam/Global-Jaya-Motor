@@ -1,4 +1,4 @@
-const CACHE_NAME = "gj-motor-v3";
+const CACHE_NAME = "gj-motor-v4";
 const ASSETS = [
   "./",
   "./index.html",
