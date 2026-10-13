@@ -40,6 +40,19 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:#111;
 .banner-overlay h1{font-size:22px}
 .banner-overlay h2{font-size:14px;font-weight:500;color:#ddd;margin-top:4px}
 
+/* Tombol Instalasi bawaan (Jika Aktif) */
+#installBtn {
+    background: #f59e0b;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 12px;
+    
+    cursor: pointer;
+}
+
 /* KEUNGGULAN */
 .keunggulan{padding:18px 5%}
 .cek-list{background:#fff;border-radius:20px;padding:16px 18px;border:1px solid #eee}
