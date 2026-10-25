@@ -19,11 +19,11 @@
 </header>
 
 <!-- ============ HALAMAN LOGIN ============ -->
-<div class="page active" id="page-login">
+<div class="page" id="page-login">
   <section class="page-section" style="padding-top:100px">
     <h2 class="judul-section">🔐 Admin Login</h2>
     <div class="admin-card">
-      <p style="font-size:13px;color:#666;margin-bottom:14px">Login untuk mengelola testimoni dan galeri.</p>
+      <p style="font-size:13px;color:#666;margin-bottom:14px">Login untuk mengelola konten website.</p>
       <input type="email" id="login-email" placeholder="Email admin" class="admin-input">
       <input type="password" id="login-password" placeholder="Password" class="admin-input">
       <button id="btn-login" class="admin-btn">Login</button>
@@ -32,57 +32,121 @@
   </section>
 </div>
 
-<!-- ============ HALAMAN ADMIN TESTIMONI ============ -->
-<div class="page" id="page-admin-testimoni">
-  <section class="page-section" style="padding-top:100px">
-    <h2 class="judul-section">📝 Manage Testimoni</h2>
+<!-- ============ HALAMAN MANAGE LAYANAN ============ -->
+<div class="page" id="page-admin-layanan">
+  <section class="page-section" style="padding-top:100px;padding-bottom:80px">
+    <h2 class="judul-section">🛠️ Manage Layanan</h2>
     <div class="admin-card">
-      <h3 style="font-size:14px;margin-bottom:10px">Tambah Testimoni Baru</h3>
-      <input type="text" id="t-nama" placeholder="Nama pelanggan" class="admin-input">
-      <input type="text" id="t-motor" placeholder="Jenis motor (mis. Beat 2021)" class="admin-input">
-      <textarea id="t-teks" placeholder="Isi testimoni..." class="admin-input" rows="3"></textarea>
-      <select id="t-rating" class="admin-input">
-        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
-        <option value="4">⭐⭐⭐⭐ (4)</option>
-        <option value="3">⭐⭐⭐ (3)</option>
-        <option value="2">⭐⭐ (2)</option>
-        <option value="1">⭐ (1)</option>
-      </select>
-      <button id="btn-add-testimoni" class="admin-btn">Tambah Testimoni</button>
-      <div id="testimoni-msg" class="admin-msg"></div>
+      <h3 style="font-size:14px;margin-bottom:10px">📝 Teks Layanan (Singkat)</h3>
+      <p style="font-size:12px;color:#777;margin-bottom:8px">Tuliskan deskripsi singkat tentang layanan bengkel. Pisahkan paragraf dengan baris kosong.</p>
+      <textarea id="layanan-teks" class="admin-input" rows="5" placeholder="Contoh: Bengkel Global Jaya Motor melayani service semua jenis motor..."></textarea>
+      <button id="btn-save-layanan" class="admin-btn">Simpan Teks Layanan</button>
+      <div id="layanan-msg" class="admin-msg"></div>
     </div>
-    <h3 style="font-size:14px;margin:20px 0 10px">Daftar Testimoni</h3>
-    <div id="admin-testimoni-list"></div>
+
+    <div class="admin-card">
+      <h3 style="font-size:14px;margin-bottom:10px">🎁 Teks Promosi</h3>
+      <p style="font-size:12px;color:#777;margin-bottom:8px">Tuliskan promo yang sedang berjalan. Gunakan emoji untuk menarik perhatian.</p>
+      <textarea id="promosi-teks" class="admin-input" rows="8" placeholder="Contoh:&#10;🎁 PROMO PELANGGAN BARU&#10;Diskon 15% untuk service pertama!&#10;&#10;💰 PAKET HEMAT GANTI OLI&#10;Ganti oli + GRATIS cek motor. Hanya Rp 50.000!"></textarea>
+      <button id="btn-save-promosi" class="admin-btn">Simpan Promosi</button>
+      <div id="promosi-msg" class="admin-msg"></div>
+    </div>
   </section>
 </div>
 
-<!-- ============ HALAMAN ADMIN GALERY ============ -->
+<!-- ============ HALAMAN MANAGE GALERY ============ -->
 <div class="page" id="page-admin-galery">
-  <section class="page-section" style="padding-top:100px">
+  <section class="page-section" style="padding-top:100px;padding-bottom:80px">
     <h2 class="judul-section">🖼️ Manage Galery</h2>
     <div class="admin-card">
-      <h3 style="font-size:14px;margin-bottom:10px">Upload Foto Baru</h3>
+      <h3 style="font-size:14px;margin-bottom:10px">📤 Upload Foto Baru</h3>
+      <p style="font-size:12px;color:#777;margin-bottom:8px">Foto akan otomatis di-compress ke ~150KB untuk performa optimal.</p>
       <input type="file" id="g-file" accept="image/*" class="admin-input">
       <input type="text" id="g-nama" placeholder="Nama foto (opsional)" class="admin-input">
       <div id="g-preview" style="margin:10px 0"></div>
       <button id="btn-upload-galery" class="admin-btn">Upload Foto</button>
       <div id="galery-msg" class="admin-msg"></div>
     </div>
-    <h3 style="font-size:14px;margin:20px 0 10px">Daftar Foto</h3>
+    <h3 style="font-size:14px;margin:20px 0 10px">📷 Daftar Foto (<span id="galery-count">0</span>)</h3>
     <div id="admin-galery-list"></div>
+  </section>
+</div>
+
+<!-- ============ HALAMAN MANAGE TESTIMONI ============ -->
+<div class="page" id="page-admin-testimoni">
+  <section class="page-section" style="padding-top:100px;padding-bottom:80px">
+    <h2 class="judul-section">⭐ Manage Testimoni</h2>
+    <div class="admin-card" style="background:#fff9e6;border:1px solid #ffe08a">
+      <p style="font-size:13px;color:#7a5c00">📋 Testimoni ditulis oleh pengunjung. Anda hanya bisa <b>melihat</b> dan <b>menghapus</b> testimoni yang tidak pantas.</p>
+    </div>
+    <h3 style="font-size:14px;margin:20px 0 10px">💬 Daftar Testimoni (<span id="testimoni-count">0</span>)</h3>
+    <div id="admin-testimoni-list"></div>
+  </section>
+</div>
+
+<!-- ============ HALAMAN MANAGE TENTANG ============ -->
+<div class="page" id="page-admin-tentang">
+  <section class="page-section" style="padding-top:100px;padding-bottom:80px">
+    <h2 class="judul-section">ℹ️ Manage Tentang Kami</h2>
+    <div class="admin-card">
+      <h3 style="font-size:14px;margin-bottom:10px">📖 Kisah Bengkel</h3>
+      <p style="font-size:12px;color:#777;margin-bottom:8px">Ceritakan perjalanan bengkel Anda — suka, duka, prestasi, visi. Pisahkan paragraf dengan baris kosong.</p>
+      <textarea id="tentang-teks" class="admin-input" rows="12" placeholder="Contoh:&#10;Global Jaya Motor didirikan pada tahun 2015 oleh Pak Joko...&#10;&#10;Visi kami: Menjadi bengkel motor terpercaya di Batam...&#10;&#10;Dengan pengalaman 10+ tahun, kami telah melayani ribuan pelanggan..."></textarea>
+      <button id="btn-save-tentang" class="admin-btn">Simpan Kisah</button>
+      <div id="tentang-msg" class="admin-msg"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ HALAMAN MANAGE HUBUNGI ============ -->
+<div class="page" id="page-admin-hubungi">
+  <section class="page-section" style="padding-top:100px;padding-bottom:80px">
+    <h2 class="judul-section">📞 Manage Hubungi</h2>
+    <div class="admin-card">
+      <h3 style="font-size:14px;margin-bottom:10px">📱 Info Kontak</h3>
+
+      <label style="font-size:12px;font-weight:700;color:#555">Nomor WhatsApp (format: 628xxx tanpa spasi)</label>
+      <input type="text" id="hub-wa" placeholder="6283879387000" class="admin-input">
+
+      <label style="font-size:12px;font-weight:700;color:#555">Alamat Lengkap</label>
+      <textarea id="hub-alamat" class="admin-input" rows="3" placeholder="Jl. Raya Batam Center No.88&#10;Belakang SPBU"></textarea>
+
+      <label style="font-size:12px;font-weight:700;color:#555">Jam Buka</label>
+      <input type="text" id="hub-jam" class="admin-input" placeholder="Senin-Minggu: 08.00-21.00 WIB">
+
+      <label style="font-size:12px;font-weight:700;color:#555">URL Google Maps (link dari Google Maps → Share → Copy link)</label>
+      <input type="text" id="hub-maps" class="admin-input" placeholder="https://maps.google.com/...">
+
+      <button id="btn-save-hubungi" class="admin-btn">Simpan Kontak</button>
+      <div id="hubungi-msg" class="admin-msg"></div>
+    </div>
+
+    <div class="admin-card" style="background:#e7f5ff;border:1px solid #b3d9ff">
+      <p style="font-size:12px;color:#0b5394"><b>💡 Cara dapat URL Google Maps:</b></p>
+      <ol style="font-size:12px;color:#0b5394;padding-left:18px;margin-top:6px;line-height:1.6">
+        <li>Buka Google Maps di HP</li>
+        <li>Cari alamat bengkel Anda</li>
+        <li>Tap nama tempat → scroll ke bawah → tap "Share"</li>
+        <li>Pilih "Copy link"</li>
+        <li>Paste link tersebut ke kolom URL Google Maps di atas</li>
+      </ol>
+    </div>
   </section>
 </div>
 
 <!-- MENU BAWAH UNTUK ADMIN -->
 <nav class="admin-nav" id="admin-nav" style="display:none">
-  <a href="#admin-testimoni">📝 Testimoni</a>
+  <a href="#admin-layanan">🛠️ Layanan</a>
   <a href="#admin-galery">🖼️ Galery</a>
+  <a href="#admin-testimoni">⭐ Testimoni</a>
+  <a href="#admin-tentang">ℹ️ Tentang</a>
+  <a href="#admin-hubungi">📞 Hubungi</a>
   <a href="#" id="btn-logout">🚪 Logout</a>
 </nav>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getDatabase, ref, set, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
   import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
   const firebaseConfig = {
@@ -99,45 +163,33 @@
   const db = getDatabase(app);
   const auth = getAuth(app);
 
-  // ===== ROUTING DI ADMIN.HTML =====
-  const ADMIN_PAGES = ['login', 'admin-testimoni', 'admin-galery'];
-
+  // ===== ROUTING =====
+  const ADMIN_PAGES = ['login', 'admin-layanan', 'admin-galery', 'admin-testimoni', 'admin-tentang', 'admin-hubungi'];
   function showAdminPage(pageName) {
-    // Hapus active dari SEMUA page dulu
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    // Tambah active hanya ke 1 page
     const page = document.getElementById('page-' + pageName);
-    if (page) {
-      page.classList.add('active');
-    }
+    if (page) page.classList.add('active');
   }
-
   function adminNavigate() {
     let hash = window.location.hash.replace('#', '') || 'login';
     if (!ADMIN_PAGES.includes(hash)) hash = 'login';
     showAdminPage(hash);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
-  // PENTING: Module script sudah deferred, jadi DOM sudah siap.
-  // Langsung panggil adminNavigate(), TIDAK perlu DOMContentLoaded.
   adminNavigate();
-
   window.addEventListener('hashchange', adminNavigate);
 
   // ===== AUTH STATE =====
   const adminNav = document.getElementById('admin-nav');
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // Sudah login → tampilkan menu admin
       adminNav.style.display = 'flex';
-      // Kalau sedang di #login, pindah ke testimoni
       const currentHash = window.location.hash.replace('#', '');
       if (currentHash === '' || currentHash === 'login') {
-        window.location.hash = '#admin-testimoni';
+        window.location.hash = '#admin-layanan';
       }
+      loadAllData();
     } else {
-      // Belum login → sembunyikan menu, paksa ke halaman login
       adminNav.style.display = 'none';
       window.location.hash = '#login';
     }
@@ -173,6 +225,281 @@
     e.preventDefault();
     await signOut(auth);
     window.location.hash = '#login';
+  });
+
+  // ============================================
+  // LOAD ALL DATA (saat login berhasil)
+  // ============================================
+  function loadAllData() {
+    loadLayanan();
+    loadPromosi();
+    loadGalery();
+    loadTestimoni();
+    loadTentang();
+    loadHubungi();
+  }
+
+  // ===== LOAD LAYANAN TEKS =====
+  function loadLayanan() {
+    onValue(ref(db, 'konten/layanan_teks'), (snap) => {
+      const text = snap.val();
+      document.getElementById('layanan-teks').value = text || '';
+    });
+  }
+
+  // ===== SAVE LAYANAN TEKS =====
+  document.getElementById('btn-save-layanan').addEventListener('click', async () => {
+    const text = document.getElementById('layanan-teks').value;
+    const msg = document.getElementById('layanan-msg');
+    try {
+      await set(ref(db, 'konten/layanan_teks'), text);
+      msg.textContent = '✅ Teks layanan tersimpan!';
+      msg.className = 'admin-msg success';
+    } catch (err) {
+      msg.textContent = '❌ ' + err.message;
+      msg.className = 'admin-msg error';
+    }
+    setTimeout(() => { msg.textContent = ''; }, 3000);
+  });
+
+  // ===== LOAD PROMOSI =====
+  function loadPromosi() {
+    onValue(ref(db, 'konten/layanan_promosi'), (snap) => {
+      const text = snap.val();
+      document.getElementById('promosi-teks').value = text || '';
+    });
+  }
+
+  // ===== SAVE PROMOSI =====
+  document.getElementById('btn-save-promosi').addEventListener('click', async () => {
+    const text = document.getElementById('promosi-teks').value;
+    const msg = document.getElementById('promosi-msg');
+    try {
+      await set(ref(db, 'konten/layanan_promosi'), text);
+      msg.textContent = '✅ Promosi tersimpan!';
+      msg.className = 'admin-msg success';
+    } catch (err) {
+      msg.textContent = '❌ ' + err.message;
+      msg.className = 'admin-msg error';
+    }
+    setTimeout(() => { msg.textContent = ''; }, 3000);
+  });
+
+  // ===== LOAD GALERY =====
+  function loadGalery() {
+    onValue(ref(db, 'galery'), (snap) => {
+      const data = snap.val();
+      const list = document.getElementById('admin-galery-list');
+      const count = document.getElementById('galery-count');
+      if (!data) {
+        list.innerHTML = '<p style="text-align:center;color:#999;padding:20px">Belum ada foto.</p>';
+        count.textContent = '0';
+        return;
+      }
+      const items = Object.entries(data).reverse();
+      count.textContent = items.length;
+      list.innerHTML = items.map(([id, item]) => `
+        <div class="admin-item">
+          <img src="${item.foto}" alt="${item.nama || 'Foto'}">
+          <div class="admin-item-info">
+            <b>${item.nama || '(tanpa nama)'}</b>
+            <p>${new Date(item.tanggal).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' })}</p>
+          </div>
+          <button class="btn-delete" onclick="deleteGalery('${id}')">Hapus</button>
+        </div>
+      `).join('');
+    });
+  }
+
+  // ===== DELETE GALERY =====
+  window.deleteGalery = async function(id) {
+    if (!confirm('Hapus foto ini?')) return;
+    try {
+      await remove(ref(db, 'galery/' + id));
+    } catch (err) {
+      alert('Gagal hapus: ' + err.message);
+    }
+  };
+
+  // ===== COMPRESS FOTO =====
+  function compressImage(file, maxWidth, quality) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let { width, height } = img;
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ===== PREVIEW + UPLOAD FOTO =====
+  let compressedPhoto = null;
+  document.getElementById('g-file').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const preview = document.getElementById('g-preview');
+    preview.innerHTML = '<p style="font-size:12px;color:#777">⏳ Mengompress...</p>';
+    try {
+      compressedPhoto = await compressImage(file, 800, 0.7);
+      const sizeKB = Math.round(compressedPhoto.length / 1024);
+      preview.innerHTML = `
+        <img src="${compressedPhoto}" style="width:100%;max-height:200px;object-fit:cover;border-radius:12px">
+        <p style="font-size:11px;color:#666;margin-top:6px">Ukuran: ~${sizeKB} KB</p>
+      `;
+    } catch (err) {
+      preview.innerHTML = '<p style="color:#c00;font-size:12px">Gagal compress: ' + err.message + '</p>';
+    }
+  });
+
+  document.getElementById('btn-upload-galery').addEventListener('click', async () => {
+    const nama = document.getElementById('g-nama').value.trim();
+    const msg = document.getElementById('galery-msg');
+    if (!compressedPhoto) {
+      msg.textContent = '⚠️ Pilih foto dulu';
+      msg.className = 'admin-msg error';
+      return;
+    }
+    const btn = document.getElementById('btn-upload-galery');
+    btn.disabled = true;
+    btn.textContent = 'Uploading...';
+    try {
+      await push(ref(db, 'galery'), {
+        nama: nama || 'Foto Galery',
+        foto: compressedPhoto,
+        tanggal: new Date().toISOString()
+      });
+      msg.textContent = '✅ Foto berhasil diupload!';
+      msg.className = 'admin-msg success';
+      document.getElementById('g-nama').value = '';
+      document.getElementById('g-file').value = '';
+      document.getElementById('g-preview').innerHTML = '';
+      compressedPhoto = null;
+    } catch (err) {
+      msg.textContent = '❌ ' + err.message;
+      msg.className = 'admin-msg error';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Upload Foto';
+    setTimeout(() => { msg.textContent = ''; }, 3000);
+  });
+
+  // ===== LOAD TESTIMONI =====
+  function loadTestimoni() {
+    onValue(ref(db, 'testimoni'), (snap) => {
+      const data = snap.val();
+      const list = document.getElementById('admin-testimoni-list');
+      const count = document.getElementById('testimoni-count');
+      if (!data) {
+        list.innerHTML = '<p style="text-align:center;color:#999;padding:20px">Belum ada testimoni.</p>';
+        count.textContent = '0';
+        return;
+      }
+      const sorted = Object.entries(data).sort((a, b) => {
+        return (b[1].tanggal || '').localeCompare(a[1].tanggal || '');
+      });
+      count.textContent = sorted.length;
+      list.innerHTML = sorted.map(([id, item]) => {
+        const stars = '⭐'.repeat(parseInt(item.rating) || 5);
+        const tgl = item.tanggal ? new Date(item.tanggal).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' }) : '-';
+        return `
+          <div class="admin-item" style="flex-direction:column;align-items:flex-start">
+            <div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+              <b>${item.nama} - ${item.motor}</b>
+              <button class="btn-delete" onclick="deleteTestimoni('${id}')">Hapus</button>
+            </div>
+            <p style="margin:6px 0;color:#555;font-size:13px;line-height:1.5">"${item.teks}"</p>
+            <div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+              <span style="font-size:14px">${stars}</span>
+              <small style="color:#999;font-size:11px">${tgl}</small>
+            </div>
+          </div>
+        `;
+      }).join('');
+    });
+  }
+
+  // ===== DELETE TESTIMONI =====
+  window.deleteTestimoni = async function(id) {
+    if (!confirm('Hapus testimoni ini?')) return;
+    try {
+      await remove(ref(db, 'testimoni/' + id));
+    } catch (err) {
+      alert('Gagal hapus: ' + err.message);
+    }
+  };
+
+  // ===== LOAD TENTANG =====
+  function loadTentang() {
+    onValue(ref(db, 'tentang/konten'), (snap) => {
+      document.getElementById('tentang-teks').value = snap.val() || '';
+    });
+  }
+
+  // ===== SAVE TENTANG =====
+  document.getElementById('btn-save-tentang').addEventListener('click', async () => {
+    const text = document.getElementById('tentang-teks').value;
+    const msg = document.getElementById('tentang-msg');
+    try {
+      await set(ref(db, 'tentang/konten'), text);
+      msg.textContent = '✅ Kisah tersimpan!';
+      msg.className = 'admin-msg success';
+    } catch (err) {
+      msg.textContent = '❌ ' + err.message;
+      msg.className = 'admin-msg error';
+    }
+    setTimeout(() => { msg.textContent = ''; }, 3000);
+  });
+
+  // ===== LOAD HUBUNGI =====
+  function loadHubungi() {
+    onValue(ref(db, 'hubungi/konten'), (snap) => {
+      const data = snap.val() || {};
+      document.getElementById('hub-wa').value = data.wa || '';
+      document.getElementById('hub-alamat').value = data.alamat || '';
+      document.getElementById('hub-jam').value = data.jam || '';
+      document.getElementById('hub-maps').value = data.maps || '';
+    });
+  }
+
+  // ===== SAVE HUBUNGI =====
+  document.getElementById('btn-save-hubungi').addEventListener('click', async () => {
+    const data = {
+      wa: document.getElementById('hub-wa').value.trim(),
+      alamat: document.getElementById('hub-alamat').value.trim(),
+      jam: document.getElementById('hub-jam').value.trim(),
+      maps: document.getElementById('hub-maps').value.trim()
+    };
+    const msg = document.getElementById('hubungi-msg');
+    if (!data.wa || !data.alamat) {
+      msg.textContent = '⚠️ Nomor WA dan Alamat wajib diisi';
+      msg.className = 'admin-msg error';
+      return;
+    }
+    try {
+      await set(ref(db, 'hubungi/konten'), data);
+      msg.textContent = '✅ Kontak tersimpan!';
+      msg.className = 'admin-msg success';
+    } catch (err) {
+      msg.textContent = '❌ ' + err.message;
+      msg.className = 'admin-msg error';
+    }
+    setTimeout(() => { msg.textContent = ''; }, 3000);
   });
 </script>
 </body>
