@@ -114,38 +114,39 @@
 </section>
 
 <script>
+// MENU HAMBURGER
 const ham = document.getElementById('hamburger');
 const drawer = document.getElementById('drawer');
 const overlay = document.getElementById('overlay');
-ham.onclick = () => { drawer.classList.add('open'); overlay.classList.add('show'); }
+ham.onclick = () => { drawer.classList.add('open'); overlay.classList.add('show'); };
 overlay.onclick = closeDrawer;
 function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('show'); }
 
-// PWA
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js'); }
-let deferredPrompt; const installBtn=document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display='block';});
-installBtn?.addEventListener('click',async()=>{deferredPrompt.prompt();deferredPrompt=null;closeDrawer();});
-  
-  // Logika Tombol Instal PWA
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.style.display = 'block';
-        });
+// PWA - SERVICE WORKER
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBtn.style.display = 'none';
-                }
-                deferredPrompt = null;
-            }
-        });
+// PWA - TOMBOL INSTAL APLIKASI
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (installBtn) installBtn.style.display = 'block';
+});
+
+if (installBtn) {
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') installBtn.style.display = 'none';
+      deferredPrompt = null;
+    }
+  });
+}
 </script>
 </body>
 </html>
