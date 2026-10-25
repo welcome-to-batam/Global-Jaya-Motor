@@ -312,9 +312,13 @@ onValue(ref(db, 'konten/layanan_promosi'), (snap) => {
   });
 
   // ===== 11. FORM TESTIMONI PUBLIK =====
-  const btnPub = document.getElementById('btn-pub-testimoni');
-  const pubMsg = document.getElementById('pub-testimoni-msg');
-  btnPub.addEventListener('click', async () => {
+const btnPub = document.getElementById('btn-pub-testimoni');
+const pubMsg = document.getElementById('pub-testimoni-msg');
+btnPub.addEventListener('click', async () => {
+  pubMsg.textContent = '⏳ Memproses...';
+  pubMsg.className = 'admin-msg';
+
+  try {
     const nama = document.getElementById('pub-nama').value.trim();
     const motor = document.getElementById('pub-motor').value.trim();
     const teks = document.getElementById('pub-teks').value.trim();
@@ -333,26 +337,27 @@ onValue(ref(db, 'konten/layanan_promosi'), (snap) => {
 
     btnPub.disabled = true;
     btnPub.textContent = 'Mengirim...';
-    try {
-      await push(ref(db, 'testimoni'), {
-        nama, motor, teks, rating: parseInt(rating),
-        tanggal: new Date().toISOString()
-      });
-      pubMsg.textContent = '✅ Terima kasih! Testimoni Anda terkirim.';
-      pubMsg.className = 'admin-msg success';
-      // Reset form
-      document.getElementById('pub-nama').value = '';
-      document.getElementById('pub-motor').value = '';
-      document.getElementById('pub-teks').value = '';
-      document.getElementById('pub-rating').value = '5';
-    } catch (err) {
-      pubMsg.textContent = '❌ Gagal: ' + err.message;
-      pubMsg.className = 'admin-msg error';
-    }
-    btnPub.disabled = false;
-    btnPub.textContent = 'Kirim Testimoni';
-  });
+    pubMsg.textContent = '📤 Mengirim ke Firebase...';
 
+    await push(ref(db, 'testimoni'), {
+      nama, motor, teks, rating: parseInt(rating),
+      tanggal: new Date().toISOString()
+    });
+
+    pubMsg.textContent = '✅ Terima kasih! Testimoni Anda terkirim.';
+    pubMsg.className = 'admin-msg success';
+    document.getElementById('pub-nama').value = '';
+    document.getElementById('pub-motor').value = '';
+    document.getElementById('pub-teks').value = '';
+    document.getElementById('pub-rating').value = '5';
+  } catch (err) {
+    pubMsg.textContent = '❌ ERROR [' + (err.code || 'UNKNOWN') + ']: ' + err.message;
+    pubMsg.className = 'admin-msg error';
+  }
+  btnPub.disabled = false;
+  btnPub.textContent = 'Kirim Testimoni';
+});
+  
   // ===== 12. PWA =====
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.log('SW skip:', err));
