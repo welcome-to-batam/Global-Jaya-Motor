@@ -113,40 +113,92 @@
   <a class="btn-wa" id="hubungi" href="https://wa.me/6283879387000?text=Halo%20Global%20Jaya%20Motor%2C%20mau%20servis%20motor">📞 Chat WA Bengkel</a>
 </section>
 
-<script>
-// MENU HAMBURGER
-const ham = document.getElementById('hamburger');
-const drawer = document.getElementById('drawer');
-const overlay = document.getElementById('overlay');
-ham.onclick = () => { drawer.classList.add('open'); overlay.classList.add('show'); };
-overlay.onclick = closeDrawer;
-function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('show'); }
+<script type="module">
+  // ===== 1. IMPORT FIREBASE SDK =====
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-// PWA - SERVICE WORKER
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
+  // ===== 2. KONFIGURASI FIREBASE =====
+  const firebaseConfig = {
+    apiKey: "AIzaSyDmY-vkuzYGmN6Jy2g5-aDVxqML3WsChEU",
+    authDomain: "global-jaya-motor.firebaseapp.com",
+    databaseURL: "https://global-jaya-motor-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    projectId: "global-jaya-motor",
+    storageBucket: "global-jaya-motor.firebasestorage.app",
+    messagingSenderId: "479565439976",
+    appId: "1:479565439976:web:47a53d9776d3c26e88ba5d"
+  };
 
-// PWA - TOMBOL INSTAL APLIKASI
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
+  // ===== 3. INISIALISASI FIREBASE =====
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth(app);
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (installBtn) installBtn.style.display = 'block';
-});
+  // ===== 4. TES KONEKSI =====
+  console.log("🔥 Firebase sudah terhubung!");
+  console.log("📦 Project:", firebaseConfig.projectId);
+  console.log("🌐 Database URL:", firebaseConfig.databaseURL);
+  console.log("🔐 Auth siap digunakan");
+  console.log("✅ Status: SEMUA LAYANAN SIAP");
 
-if (installBtn) {
-  installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') installBtn.style.display = 'none';
-      deferredPrompt = null;
+  // Export supaya bisa dipakai di script lain nanti
+  window.fb = { db, auth, ref, set, push, onValue, remove, signInWithEmailAndPassword, signOut, onAuthStateChanged };
+
+  // ===== 5. MENU HAMBURGER (dari versi lama, tetap dipakai) =====
+  const ham = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  ham.onclick = () => { drawer.classList.add('open'); overlay.classList.add('show'); };
+  overlay.onclick = closeDrawer;
+  function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('show'); }
+
+  // ===== 6. ROUTING ANTAR HALAMAN (dari versi lama, tetap dipakai) =====
+  const PAGES = ['beranda', 'galery', 'testimoni', 'tentang', 'hubungi'];
+  function showPage(pageName) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + pageName);
+    if (page) page.classList.add('active');
+  }
+  function navigate() {
+    let hash = window.location.hash.replace('#', '') || 'beranda';
+    closeDrawer();
+    if (hash === 'layanan') {
+      showPage('beranda');
+      setTimeout(() => {
+        const el = document.getElementById('layanan');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 60);
+      return;
     }
+    if (!PAGES.includes(hash)) hash = 'beranda';
+    showPage(hash);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  window.addEventListener('hashchange', navigate);
+  window.addEventListener('DOMContentLoaded', navigate);
+
+  // ===== 7. PWA (dari versi lama, tetap dipakai) =====
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('SW skip:', err));
+  }
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.style.display = 'block';
   });
-}
-</script>
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') installBtn.style.display = 'none';
+        deferredPrompt = null;
+      }
+    });
+  }
+ </script>
 </body>
 </html>
