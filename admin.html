@@ -101,27 +101,39 @@
 
   // ===== ROUTING DI ADMIN.HTML =====
   const ADMIN_PAGES = ['login', 'admin-testimoni', 'admin-galery'];
+
   function showAdminPage(pageName) {
+    // Hapus active dari SEMUA page dulu
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Tambah active hanya ke 1 page
     const page = document.getElementById('page-' + pageName);
-    if (page) page.classList.add('active');
+    if (page) {
+      page.classList.add('active');
+    }
   }
+
   function adminNavigate() {
     let hash = window.location.hash.replace('#', '') || 'login';
     if (!ADMIN_PAGES.includes(hash)) hash = 'login';
     showAdminPage(hash);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  // PENTING: Module script sudah deferred, jadi DOM sudah siap.
+  // Langsung panggil adminNavigate(), TIDAK perlu DOMContentLoaded.
+  adminNavigate();
+
   window.addEventListener('hashchange', adminNavigate);
-  window.addEventListener('DOMContentLoaded', adminNavigate);
 
   // ===== AUTH STATE =====
   const adminNav = document.getElementById('admin-nav');
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // Sudah login → tampilkan menu admin, pindah ke testimoni
+      // Sudah login → tampilkan menu admin
       adminNav.style.display = 'flex';
-      if (window.location.hash === '' || window.location.hash === '#login') {
+      // Kalau sedang di #login, pindah ke testimoni
+      const currentHash = window.location.hash.replace('#', '');
+      if (currentHash === '' || currentHash === 'login') {
         window.location.hash = '#admin-testimoni';
       }
     } else {
