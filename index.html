@@ -42,6 +42,9 @@
   <button id="installBtn" style="display: none;">Instal Aplikasi</button>
 </section>
 
+  <!-- TAMBAHAN: STATUS FIREBASE -->
+<div id="status-fb"></div>
+
 <!-- KEUNGGULAN -->
 <section class="keunggulan">
   <div class="cek-list">
@@ -135,17 +138,35 @@
   const db = getDatabase(app);
   const auth = getAuth(app);
 
-  // ===== 4. TES KONEKSI =====
-  console.log("🔥 Firebase sudah terhubung!");
-  console.log("📦 Project:", firebaseConfig.projectId);
-  console.log("🌐 Database URL:", firebaseConfig.databaseURL);
-  console.log("🔐 Auth siap digunakan");
-  console.log("✅ Status: SEMUA LAYANAN SIAP");
+  // ===== 4. TES KONEKSI - TAMPILKAN DI HALAMAN =====
+  try {
+    const statusBox = document.getElementById('status-fb');
+    if (statusBox) {
+      statusBox.innerHTML = `
+        <div style="background:#d4edda;color:#155724;padding:14px 18px;border-radius:14px;margin:14px 4%;font-size:13px;font-family:monospace;line-height:1.6">
+          <div style="font-weight:800;font-size:14px;margin-bottom:8px">🔥 FIREBASE STATUS</div>
+          <div>✅ Firebase: <b>TERHUBUNG</b></div>
+          <div>📦 Project: <b>${firebaseConfig.projectId}</b></div>
+          <div>🌐 DB: <b>...firebasedatabase.app</b></div>
+          <div>🔐 Auth: <b>Siap</b></div>
+        </div>
+      `;
+    }
+  } catch(err) {
+    const statusBox = document.getElementById('status-fb');
+    if (statusBox) {
+      statusBox.innerHTML = `
+        <div style="background:#f8d7da;color:#721c24;padding:14px 18px;border-radius:14px;margin:14px 4%;font-size:13px;font-family:monospace">
+          ❌ ERROR: ${err.message}
+        </div>
+      `;
+    }
+  }
 
-  // Export supaya bisa dipakai di script lain nanti
+  // Export untuk script lain nanti
   window.fb = { db, auth, ref, set, push, onValue, remove, signInWithEmailAndPassword, signOut, onAuthStateChanged };
 
-  // ===== 5. MENU HAMBURGER (dari versi lama, tetap dipakai) =====
+  // ===== 5. MENU HAMBURGER =====
   const ham = document.getElementById('hamburger');
   const drawer = document.getElementById('drawer');
   const overlay = document.getElementById('overlay');
@@ -153,7 +174,7 @@
   overlay.onclick = closeDrawer;
   function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('show'); }
 
-  // ===== 6. ROUTING ANTAR HALAMAN (dari versi lama, tetap dipakai) =====
+  // ===== 6. ROUTING ANTAR HALAMAN =====
   const PAGES = ['beranda', 'galery', 'testimoni', 'tentang', 'hubungi'];
   function showPage(pageName) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -178,7 +199,7 @@
   window.addEventListener('hashchange', navigate);
   window.addEventListener('DOMContentLoaded', navigate);
 
-  // ===== 7. PWA (dari versi lama, tetap dipakai) =====
+  // ===== 7. PWA =====
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.log('SW skip:', err));
   }
@@ -199,6 +220,6 @@
       }
     });
   }
- </script>
+</script>
 </body>
 </html>
