@@ -221,3 +221,19 @@ select.admin-input { background: #fff; cursor: pointer; }
   background: #ff1e1e;
 }
 body { padding-bottom: 60px; } /* ruang untuk admin nav */
+
+/* ============================================
+   SISTEM MULTI-HALAMAN - WAJIB!
+   ============================================ */
+.page {
+  display: none !important;
+  min-height: 70vh;
+  animation: fadeIn .3s ease;
+}
+.page.active {
+  display: block !important;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
