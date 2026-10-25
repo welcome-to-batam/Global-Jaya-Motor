@@ -194,3 +194,30 @@ select.admin-input { background: #fff; cursor: pointer; }
   object-fit: cover;
   border-radius: 12px;
 }
+
+/* ============================================
+   ADMIN NAVIGATION (di admin.html)
+   ============================================ */
+.admin-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #0e0e0e;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 4%;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+}
+.admin-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: .2s;
+}
+.admin-nav a:hover {
+  background: #ff1e1e;
+}
+body { padding-bottom: 60px; } /* ruang untuk admin nav */
