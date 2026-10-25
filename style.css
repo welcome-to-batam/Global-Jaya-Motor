@@ -103,3 +103,94 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:#111;
   .section{padding:26px 20%}
   .banner-merah{margin:0 20%}
 }
+
+/* ============================================
+   ADMIN PANEL
+   ============================================ */
+.drawer-divider {
+  height: 1px;
+  background: #eee;
+  margin: 10px 4px;
+}
+.admin-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+}
+.admin-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  margin-bottom: 10px;
+  outline: none;
+  transition: .2s;
+}
+.admin-input:focus { border-color: #0e0e0e; }
+textarea.admin-input { resize: vertical; }
+select.admin-input { background: #fff; cursor: pointer; }
+.admin-btn {
+  width: 100%;
+  background: #0e0e0e;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: .2s;
+}
+.admin-btn:hover { background: #ff1e1e; }
+.admin-btn:disabled { background: #999; cursor: not-allowed; }
+.admin-msg {
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  min-height: 18px;
+}
+.admin-msg.success { color: #155724; }
+.admin-msg.error { color: #721c24; }
+.admin-item {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.admin-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.admin-item-info { flex: 1; min-width: 0; }
+.admin-item-info b { font-size: 13px; display: block; }
+.admin-item-info p { font-size: 11px; color: #777; margin: 4px 0; }
+.admin-item-info span { font-size: 11px; }
+.btn-delete {
+  background: #ff1e1e;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-delete:hover { background: #c00; }
+#g-preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
