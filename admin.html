@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>Admin - Global Jaya Motor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER MELENGKUNG -->
+<header class="header-rounded">
+  <div class="logo-area">
+    <img src="logo.png" alt="Logo" class="logo-foto" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3774/3774083.png'">
+    <span>GLOBAL JAYA MOTOR (ADMIN)</span>
+  </div>
+  <a href="index.html#beranda" class="back-btn" style="background:#fff;color:#111;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:12px;font-weight:700">← Beranda</a>
+</header>
+
+<!-- ============ HALAMAN LOGIN ============ -->
+<div class="page active" id="page-login">
+  <section class="page-section" style="padding-top:100px">
+    <h2 class="judul-section">🔐 Admin Login</h2>
+    <div class="admin-card">
+      <p style="font-size:13px;color:#666;margin-bottom:14px">Login untuk mengelola testimoni dan galeri.</p>
+      <input type="email" id="login-email" placeholder="Email admin" class="admin-input">
+      <input type="password" id="login-password" placeholder="Password" class="admin-input">
+      <button id="btn-login" class="admin-btn">Login</button>
+      <div id="login-msg" class="admin-msg"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ HALAMAN ADMIN TESTIMONI ============ -->
+<div class="page" id="page-admin-testimoni">
+  <section class="page-section" style="padding-top:100px">
+    <h2 class="judul-section">📝 Manage Testimoni</h2>
+    <div class="admin-card">
+      <h3 style="font-size:14px;margin-bottom:10px">Tambah Testimoni Baru</h3>
+      <input type="text" id="t-nama" placeholder="Nama pelanggan" class="admin-input">
+      <input type="text" id="t-motor" placeholder="Jenis motor (mis. Beat 2021)" class="admin-input">
+      <textarea id="t-teks" placeholder="Isi testimoni..." class="admin-input" rows="3"></textarea>
+      <select id="t-rating" class="admin-input">
+        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+        <option value="4">⭐⭐⭐⭐ (4)</option>
+        <option value="3">⭐⭐⭐ (3)</option>
+        <option value="2">⭐⭐ (2)</option>
+        <option value="1">⭐ (1)</option>
+      </select>
+      <button id="btn-add-testimoni" class="admin-btn">Tambah Testimoni</button>
+      <div id="testimoni-msg" class="admin-msg"></div>
+    </div>
+    <h3 style="font-size:14px;margin:20px 0 10px">Daftar Testimoni</h3>
+    <div id="admin-testimoni-list"></div>
+  </section>
+</div>
+
+<!-- ============ HALAMAN ADMIN GALERY ============ -->
+<div class="page" id="page-admin-galery">
+  <section class="page-section" style="padding-top:100px">
+    <h2 class="judul-section">🖼️ Manage Galery</h2>
+    <div class="admin-card">
+      <h3 style="font-size:14px;margin-bottom:10px">Upload Foto Baru</h3>
+      <input type="file" id="g-file" accept="image/*" class="admin-input">
+      <input type="text" id="g-nama" placeholder="Nama foto (opsional)" class="admin-input">
+      <div id="g-preview" style="margin:10px 0"></div>
+      <button id="btn-upload-galery" class="admin-btn">Upload Foto</button>
+      <div id="galery-msg" class="admin-msg"></div>
+    </div>
+    <h3 style="font-size:14px;margin:20px 0 10px">Daftar Foto</h3>
+    <div id="admin-galery-list"></div>
+  </section>
+</div>
+
+<!-- MENU BAWAH UNTUK ADMIN -->
+<nav class="admin-nav" id="admin-nav" style="display:none">
+  <a href="#admin-testimoni">📝 Testimoni</a>
+  <a href="#admin-galery">🖼️ Galery</a>
+  <a href="#" id="btn-logout">🚪 Logout</a>
+</nav>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDmY-vkuzYGmN6Jy2g5-aDVxqML3WsChEU",
+    authDomain: "global-jaya-motor.firebaseapp.com",
+    databaseURL: "https://global-jaya-motor-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    projectId: "global-jaya-motor",
+    storageBucket: "global-jaya-motor.firebasestorage.app",
+    messagingSenderId: "479565439976",
+    appId: "1:479565439976:web:47a53d9776d3c26e88ba5d"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth(app);
+
+  // ===== ROUTING DI ADMIN.HTML =====
+  const ADMIN_PAGES = ['login', 'admin-testimoni', 'admin-galery'];
+  function showAdminPage(pageName) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + pageName);
+    if (page) page.classList.add('active');
+  }
+  function adminNavigate() {
+    let hash = window.location.hash.replace('#', '') || 'login';
+    if (!ADMIN_PAGES.includes(hash)) hash = 'login';
+    showAdminPage(hash);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  window.addEventListener('hashchange', adminNavigate);
+  window.addEventListener('DOMContentLoaded', adminNavigate);
+
+  // ===== AUTH STATE =====
+  const adminNav = document.getElementById('admin-nav');
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Sudah login → tampilkan menu admin, pindah ke testimoni
+      adminNav.style.display = 'flex';
+      if (window.location.hash === '' || window.location.hash === '#login') {
+        window.location.hash = '#admin-testimoni';
+      }
+    } else {
+      // Belum login → sembunyikan menu, paksa ke halaman login
+      adminNav.style.display = 'none';
+      window.location.hash = '#login';
+    }
+  });
+
+  // ===== LOGIN LOGIC =====
+  const btnLogin = document.getElementById('btn-login');
+  const loginMsg = document.getElementById('login-msg');
+  btnLogin.addEventListener('click', async () => {
+    const email = document.getElementById('login-email').value.trim();
+    const pass = document.getElementById('login-password').value;
+    if (!email || !pass) {
+      loginMsg.textContent = '⚠️ Email dan password wajib diisi';
+      loginMsg.className = 'admin-msg error';
+      return;
+    }
+    btnLogin.disabled = true;
+    btnLogin.textContent = 'Logging in...';
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      loginMsg.textContent = '✅ Login berhasil!';
+      loginMsg.className = 'admin-msg success';
+    } catch (err) {
+      loginMsg.textContent = '❌ ' + err.message;
+      loginMsg.className = 'admin-msg error';
+      btnLogin.disabled = false;
+      btnLogin.textContent = 'Login';
+    }
+  });
+
+  // ===== LOGOUT LOGIC =====
+  document.getElementById('btn-logout').addEventListener('click', async (e) => {
+    e.preventDefault();
+    await signOut(auth);
+    window.location.hash = '#login';
+  });
+</script>
+</body>
+</html>
