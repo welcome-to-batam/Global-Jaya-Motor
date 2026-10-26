@@ -294,23 +294,43 @@ onValue(ref(db, 'konten/layanan_promosi'), (snap) => {
   });
 
   // ===== 10. LOAD HUBUNGI DARI DB =====
-  const hubungiContent = document.getElementById('hubungi-content');
-  onValue(ref(db, 'hubungi/konten'), (snap) => {
-    const data = snap.val();
-    if (!data) {
-      hubungiContent.innerHTML = '<p style="color:#999">Info kontak belum diisi admin.</p>';
-      return;
-    }
-    const waUrl = `https://wa.me/${data.wa}?text=Halo%20Global%20Jaya%20Motor%2C%20mau%20servis%20motor`;
-    hubungiContent.innerHTML = `
-      <p>📍 <b>Alamat</b><br>${data.alamat || '-'}</p>
-      <p>🕒 <b>Jam Buka</b><br>${data.jam || '-'}</p>
-      <p>💬 <b>WhatsApp</b><br>${data.wa || '-'}</p>
-      <a href="${waUrl}" target="_blank" class="admin-btn" style="background:#25D366;margin-bottom:8px">💬 Chat WhatsApp</a>
-      <a href="${data.maps || '#'}" target="_blank" class="admin-btn" style="background:#0e0e0e">📍 Lihat di Google Maps</a>
-    `;
-  });
-
+const hubungiContent = document.getElementById('hubungi-content');
+onValue(ref(db, 'hubungi/konten'), (snap) => {
+  const data = snap.val();
+  if (!data) {
+    hubungiContent.innerHTML = '<p style="color:#999;text-align:center;padding:20px">Info kontak belum diisi admin.</p>';
+    return;
+  }
+  const waUrl = `https://wa.me/${data.wa}?text=Halo%20Global%20Jaya%20Motor%2C%20mau%20servis%20motor`;
+  const waDisplay = data.wa ? data.wa.replace(/(\d{4})(\d{4})(\d+)/, '$1-$2-$3') : '-';
+  hubungiContent.innerHTML = `
+    <div class="hubungi-info">
+      <p>
+        <span style="font-size:22px">📍</span>
+        <span>
+          <b>Alamat</b>
+          <span>${data.alamat || '-'}</span>
+        </span>
+      </p>
+      <p>
+        <span style="font-size:22px">🕒</span>
+        <span>
+          <b>Jam Buka</b>
+          <span>${data.jam || '-'}</span>
+        </span>
+      </p>
+      <p>
+        <span style="font-size:22px">💬</span>
+        <span>
+          <b>WhatsApp</b>
+          <a href="${waUrl}" target="_blank" style="color:#25D366;font-weight:700;text-decoration:none;font-size:15px">${waDisplay}</a>
+        </span>
+      </p>
+    </div>
+    <a href="${data.maps || '#'}" target="_blank" class="btn-maps">📍 Lihat di Google Maps</a>
+  `;
+});
+  
   // ===== 11. FORM TESTIMONI PUBLIK =====
 const btnPub = document.getElementById('btn-pub-testimoni');
 const pubMsg = document.getElementById('pub-testimoni-msg');
