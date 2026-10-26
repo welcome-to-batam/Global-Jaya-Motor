@@ -293,7 +293,7 @@ onValue(ref(db, 'konten/layanan_promosi'), (snap) => {
     tentangContent.innerHTML = `<div style="font-size:14px;line-height:1.7;color:#333;white-space:pre-wrap">${text}</div>`;
   });
 
-  // ===== 10. LOAD HUBUNGI DARI DB =====
+// ===== 10. LOAD HUBUNGI DARI DB =====
 const hubungiContent = document.getElementById('hubungi-content');
 onValue(ref(db, 'hubungi/konten'), (snap) => {
   const data = snap.val();
@@ -306,28 +306,31 @@ onValue(ref(db, 'hubungi/konten'), (snap) => {
   hubungiContent.innerHTML = `
     <div class="hubungi-info">
       <p>
-        <span style="font-size:22px">📍</span>
-        <span>
+        <span class="hubungi-icon">📍</span>
+        <span class="hubungi-text">
           <b>Alamat</b>
           <span>${data.alamat || '-'}</span>
         </span>
       </p>
       <p>
-        <span style="font-size:22px">🕒</span>
-        <span>
+        <span class="hubungi-icon">🕒</span>
+        <span class="hubungi-text">
           <b>Jam Buka</b>
           <span>${data.jam || '-'}</span>
         </span>
       </p>
       <p>
-        <span style="font-size:22px">💬</span>
-        <span>
+        <span class="hubungi-icon">💬</span>
+        <span class="hubungi-text">
           <b>WhatsApp</b>
-          <a href="${waUrl}" target="_blank" style="color:#25D366;font-weight:700;text-decoration:none;font-size:15px">${waDisplay}</a>
+          <span>${waDisplay}</span>
         </span>
       </p>
     </div>
-    <a href="${data.maps || '#'}" target="_blank" class="btn-maps">📍 Lihat di Google Maps</a>
+    <div class="hubungi-buttons">
+      <a href="${waUrl}" target="_blank" class="btn-wa">💬 Chat WhatsApp</a>
+      <a href="${data.maps || '#'}" target="_blank" class="btn-maps">📍 Lihat di Google Maps</a>
+    </div>
   `;
 });
   
