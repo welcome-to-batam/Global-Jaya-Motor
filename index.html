@@ -7,6 +7,7 @@
   <title>Global Jaya Motor - Bengkel Batam</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lobster&display=swap" rel="stylesheet">  <!-- TAMBAH INI -->
 </head>
 <body>
 
@@ -84,6 +85,19 @@
     <h2>🚨 MENERIMA SEGALA JENIS KERUSAKAN MOTOR</h2>
     <p>Dari kerusakan ringan hingga kerusakan berat. Kami menangani motor matic, bebek, maupun manual.</p>
   </section>
+</div>
+
+  <!-- KONSULTASI SANG MECHANIC -->
+<section class="konsul-mechanic">
+  <p class="konsul-title">Konsultasikan kerusakan motor anda dengan</p>
+  <h2 class="sang-mechanic-text">
+    <span class="sang-text">Sang</span> <span class="mechanic-text">MECHANIC</span>
+  </h2>
+  <p class="konsul-subtitle">👇 Klik foto untuk chat dengan sang mechanic 👇</p>
+  <a href="#" id="konsul-link" target="_blank" class="konsul-photo-link">
+    <img src="sang-mechanic.png" alt="Sang Mechanic" class="konsul-photo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3774/3774083.png'">
+  </a>
+</section>
 </div>
 
   <!-- ============ HALAMAN LAYANAN (Teks + Promosi) ============ -->
@@ -333,6 +347,15 @@ onValue(ref(db, 'hubungi/konten'), (snap) => {
     </div>
   `;
 });
+
+  // ===== 10B. KONSULTASI SANG MECHANIC - LINK WA =====
+const konsulLink = document.getElementById('konsul-link');
+onValue(ref(db, 'hubungi/konten'), (snap) => {
+  const data = snap.val();
+  if (data && data.wa) {
+    konsulLink.href = `https://wa.me/${data.wa}?text=Halo%20Sang%20Mechanic%2C%20mau%20konsultasi%20kerusakan%20motor%20saya`;
+  }
+});
   
   // ===== 11. FORM TESTIMONI PUBLIK =====
 const btnPub = document.getElementById('btn-pub-testimoni');
@@ -405,4 +428,3 @@ btnPub.addEventListener('click', async () => {
 </script>
 </body>
 </html>
-  
