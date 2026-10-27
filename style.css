@@ -27,22 +27,48 @@ body{
    ============================================ */
 .header-rounded{
   position:fixed;
-  top:0;left:0;right:0;        /* ← nempel ke toolbar HP */
+  top:0;left:0;right:0;
   z-index:100;
-  background:var(--black);
+  /* ANIMASI GRADIENT 4 WARNA */
+  background:linear-gradient(
+    45deg,
+    #ff1e1e,    /* merah brand */
+    #ff6b00,    /* oranye energi */
+    #ffaa00,    /* kuning semangat */
+    #1a1a1a,    /* hitam elegan */
+    #ff1e1e     /* balik ke merah (loop) */
+  );
+  background-size:400% 400%;
+  animation:headerGradient 12s ease infinite;
   display:flex;justify-content:space-between;align-items:center;
-  padding:14px 20px;           /* ← padding dalam, bukan margin luar */
-  border-radius:0;             /* ← sudut tegas, tidak melengkung */
-  box-shadow:0 2px 12px rgba(0,0,0,0.2);
-  border-bottom:1px solid #1a1a1a;
+  padding:14px 20px;
+  border-radius:0;
+  box-shadow:0 4px 20px rgba(255,30,30,0.3);
+  border-bottom:2px solid rgba(255,255,255,0.15);
 }
+
+/* ANIMASI HEADER - 4 WARNA BERGANTIAN */
+@keyframes headerGradient{
+  0%   { background-position:0% 50% }
+  25%  { background-position:100% 50% }
+  50%  { background-position:100% 100% }
+  75%  { background-position:0% 100% }
+  100% { background-position:0% 50% }
+}
+
+/* TEXT HEADER - WHITE DENGAN SHADOW SUPAYA KONTRAS */
 .logo-area{
   display:flex;align-items:center;gap:10px;
-  color:#fff;font-weight:800;font-size:14px;letter-spacing:.5px;
+  color:#fff;
+  font-weight:800;
+  font-size:14px;
+  letter-spacing:.5px;
+  text-shadow:0 1px 4px rgba(0,0,0,0.6);  /* ← shadow supaya tetap terbaca */
 }
 .logo-foto{
   width:36px;height:36px;border-radius:50%;object-fit:cover;background:#fff;
   border:2px solid #fff;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 .hamburger{
   width:32px;height:22px;
@@ -50,8 +76,12 @@ body{
   cursor:pointer;padding:2px;
 }
 .hamburger span{
-  height:3px;background:#fff;border-radius:10px;display:block;
+  height:3px;
+  background:#fff;
+  border-radius:10px;
+  display:block;
   transition:.3s;
+  box-shadow:0 1px 2px rgba(0,0,0,0.4);  /* ← shadow di garis hamburger */
 }
 .hamburger:hover span:nth-child(1){transform:translateY(-1px)}
 .hamburger:hover span:nth-child(3){transform:translateY(1px)}
@@ -102,37 +132,22 @@ body{
 }
 
 /* ============================================
-   BANNER
+   BANNER - FULL BLEED, IMAGE FULLY VISIBLE
    ============================================ */
 .banner{
-  margin:0;                    /* ← full width, nempel ke sisi */
-  height:340px;                /* ← lebih tinggi, judul tidak terpotong */
-  border-radius:0;             /* ← sudut tegas */
+  margin:0;
+  height:380px;                /* ← lebih tinggi supaya teks banner muat */
+  border-radius:0;
   overflow:hidden;
   position:relative;
-  background:url('banner.jpg') center/cover no-repeat,
-              url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=1000') center/cover;
-  display:flex;align-items:flex-end;
-  box-shadow:none;             /* ← hilangkan shadow karena full width */
+  background:url('banner.jpg') center center / cover no-repeat,
+              url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=1000') center center / cover;
+  display:block;               /* ← ganti flex jadi block, tidak perlu overlay lagi */
+  box-shadow:none;
 }
-.banner-overlay{
-  width:100%;
-  background:linear-gradient(transparent,rgba(0,0,0,0.9));
-  padding:30px 24px;color:#fff;
-}
-.banner-overlay h1{
-  font-size:26px;              /* ← lebih besar */
-  font-weight:800;
-  letter-spacing:.5px;
-  line-height:1.2;             /* ← multiline rapi */
-  margin-bottom:4px;
-}
-.banner-overlay h2{
-  font-size:14px;
-  font-weight:500;
-  color:#ddd;
-  margin-top:4px;
-}
+
+/* Overlay text - HIDDEN, karena banner image sudah punya teks */
+.banner-overlay{display:none !important}
 
 #installBtn{
   background:#f59e0b;color:#fff;border:none;
