@@ -136,7 +136,7 @@ body{
    ============================================ */
 .banner{
   margin:0;
-  height:300px;                /* ← lebih tinggi supaya teks banner muat */
+  height:380px;                /* ← lebih tinggi supaya teks banner muat */
   border-radius:0;
   overflow:hidden;
   position:relative;
