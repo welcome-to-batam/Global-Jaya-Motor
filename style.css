@@ -141,6 +141,7 @@ body{
   overflow:hidden;
   position:relative;
   background:url('banner.jpg') center center / cover no-repeat,
+     url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=1000') center center / cover;
               display:block;               /* ← ganti flex jadi block, tidak perlu overlay lagi */
   box-shadow:none;
 }
