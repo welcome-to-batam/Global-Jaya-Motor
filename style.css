@@ -616,7 +616,7 @@ body:has(.admin-nav){padding-bottom:70px}
   .drawer{left:25%;right:25%}
   
   /* Banner tetap full width di desktop */
-  .banner{height:480px;margin:0;border-radius:0}
+  .banner{height:280px;margin:0;border-radius:0}
   
   /* Konten lain tetap dengan padding */
   .section{padding:30px 20%}
