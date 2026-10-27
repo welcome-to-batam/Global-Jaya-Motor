@@ -12,11 +12,12 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+
 body{
   font-family:'Plus Jakarta Sans',sans-serif;
   background:var(--bg);
   color:#111;
-  padding-top:78px;
+  padding-top:62px;          /* ← kurangi karena header lebih tipis */
   padding-bottom:20px;
   -webkit-font-smoothing:antialiased;
 }
@@ -25,12 +26,15 @@ body{
    HEADER MELENGKUNG
    ============================================ */
 .header-rounded{
-  position:fixed;top:12px;left:4%;right:4%;z-index:100;
+  position:fixed;
+  top:0;left:0;right:0;        /* ← nempel ke toolbar HP */
+  z-index:100;
   background:var(--black);
   display:flex;justify-content:space-between;align-items:center;
-  padding:14px 18px;
-  border-radius:22px;
-  box-shadow:var(--shadow-md);
+  padding:14px 20px;           /* ← padding dalam, bukan margin luar */
+  border-radius:0;             /* ← sudut tegas, tidak melengkung */
+  box-shadow:0 2px 12px rgba(0,0,0,0.2);
+  border-bottom:1px solid #1a1a1a;
 }
 .logo-area{
   display:flex;align-items:center;gap:10px;
@@ -101,21 +105,34 @@ body{
    BANNER
    ============================================ */
 .banner{
-  margin:0 4%;height:280px;
-  border-radius:24px;overflow:hidden;
+  margin:0;                    /* ← full width, nempel ke sisi */
+  height:340px;                /* ← lebih tinggi, judul tidak terpotong */
+  border-radius:0;             /* ← sudut tegas */
+  overflow:hidden;
   position:relative;
   background:url('banner.jpg') center/cover no-repeat,
               url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=1000') center/cover;
   display:flex;align-items:flex-end;
-  box-shadow:var(--shadow-md);
+  box-shadow:none;             /* ← hilangkan shadow karena full width */
 }
 .banner-overlay{
   width:100%;
-  background:linear-gradient(transparent,rgba(0,0,0,0.85));
-  padding:24px 20px;color:#fff;
+  background:linear-gradient(transparent,rgba(0,0,0,0.9));
+  padding:30px 24px;color:#fff;
 }
-.banner-overlay h1{font-size:22px;font-weight:800;letter-spacing:.5px}
-.banner-overlay h2{font-size:14px;font-weight:500;color:#ddd;margin-top:4px}
+.banner-overlay h1{
+  font-size:26px;              /* ← lebih besar */
+  font-weight:800;
+  letter-spacing:.5px;
+  line-height:1.2;             /* ← multiline rapi */
+  margin-bottom:4px;
+}
+.banner-overlay h2{
+  font-size:14px;
+  font-weight:500;
+  color:#ddd;
+  margin-top:4px;
+}
 
 #installBtn{
   background:#f59e0b;color:#fff;border:none;
@@ -578,15 +595,21 @@ body:has(.admin-nav){padding-bottom:70px}
    RESPONSIVE DESKTOP
    ============================================ */
 @media(min-width:800px){
-  .header-rounded{left:20%;right:20%}
-  .drawer{left:20%;right:20%}
-  .banner{height:380px;margin:0 20%}
+  /* Header tetap full width di desktop (seperti aplikasi modern) */
+  .header-rounded{left:0;right:0;border-radius:0}
+  .drawer{left:25%;right:25%}
+  
+  /* Banner tetap full width di desktop */
+  .banner{height:480px;margin:0;border-radius:0}
+  
+  /* Konten lain tetap dengan padding */
   .section{padding:30px 20%}
   .banner-merah{margin:0 20%}
   .page-section{padding:12px 20% 50px}
   .galery-big{grid-template-columns:repeat(3,1fr)}
   .galery-big img{height:260px}
   .grid-2{grid-template-columns:repeat(3,1fr)}
+  .konsul-mechanic{margin:30px 20% 40px}
 }
 
 /* ============================================
