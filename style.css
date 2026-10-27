@@ -136,13 +136,12 @@ body{
    ============================================ */
 .banner{
   margin:0;
-  height:380px;                /* ← lebih tinggi supaya teks banner muat */
+  height:300px;                /* ← lebih tinggi supaya teks banner muat */
   border-radius:0;
   overflow:hidden;
   position:relative;
   background:url('banner.jpg') center center / cover no-repeat,
-              url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=1000') center center / cover;
-  display:block;               /* ← ganti flex jadi block, tidak perlu overlay lagi */
+              display:block;               /* ← ganti flex jadi block, tidak perlu overlay lagi */
   box-shadow:none;
 }
 
