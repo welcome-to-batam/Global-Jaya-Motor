@@ -132,21 +132,22 @@ body{
 }
 
 /* ============================================
-   BANNER - FULL BLEED, IMAGE FULLY VISIBLE
+   BANNER - FULL BLEED, HANYA PAKAI banner.jpg
    ============================================ */
 .banner{
   margin:0;
-  height:380px;                /* ← lebih tinggi supaya teks banner muat */
+  height:180px;                 /* ← HEIGHT 180px SESUAI REQUEST */
   border-radius:0;
   overflow:hidden;
   position:relative;
-  background:url('banner.jpg') center center / cover no-repeat,
-     url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?q=80&w=1000') center center / cover;
-              display:block;               /* ← ganti flex jadi block, tidak perlu overlay lagi */
+  background:url('banner.jpg') center center / cover no-repeat;
+  /* HAPUS URL Unsplash fallback - tidak diperlukan lagi */
+  background-color:#0e0e0e;     /* ← warna fallback kalau foto gagal load */
+  display:block;
   box-shadow:none;
 }
 
-/* Overlay text - HIDDEN, karena banner image sudah punya teks */
+/* Overlay text - HIDDEN */
 .banner-overlay{display:none !important}
 
 #installBtn{
