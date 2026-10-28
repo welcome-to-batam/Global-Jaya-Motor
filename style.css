@@ -764,61 +764,42 @@ body:has(.admin-nav){padding-bottom:70px}
   .mechanic-text{font-size:68px}
   }
 
-        /* ========================================================== */
-        /* EFEK BARU: GUMPALAN AWAN JINGGA KOSMIS (BACKGROUND NEBULA) */
-        /* ========================================================== */
-        .tombol-api-link::before {
-            content: '';
-            position: absolute;
-            width: 85%;
-            height: 85%;
-            border-radius: 50%;
-            /* Membuat efek gradasi awan nebula jingga keemasan yang menyala */
-            background: radial-gradient(circle, rgba(255,120,0,0.85) 0%, rgba(200,60,0,0.6) 40%, rgba(100,20,0,0.2) 70%, rgba(0,0,0,0) 100%);
-            z-index: 0;
-            filter: blur(6px); /* Memberikan efek gumpalan awan kabur yang lembut */
-            animation: denyutAwan 4s infinite ease-in-out alternate;
-        }
+       /* Container animasi kecil di pojok bawah */
+  #masGondrongAnimation {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;  /* ukuran kecil */
+    height: 100px;
+    pointer-events: none; /* agar tidak menghalangi klik */
+    background: transparent;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
 
-        /* Kanvas WebGL tempat jilatan api berputar di atas awan jingga */
-        canvas {
-            position: absolute;
-            width: 85%;
-            height: 85%;
-            z-index: 1;
-            border-radius: 50%;
-            overflow: hidden;
-        }
+  #fireCanvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+  }
 
-        /* WADAH FOTO LUBANG TENGAH (EFEK LENSA CEMBUNG HITAM) */
-        .foto-tengah {
-            position: absolute;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            overflow: hidden;
-            z-index: 2;
-            background: #000000; /* Tetap hitam pekat agar efek lensa 3D kaca berkilau maksimal */
-            border: 1px solid rgba(255, 130, 0, 0.5);
-            
-            /* Bayangan dalam (Vignette) pembentuk lensa kaca 3D cembung */
-            box-shadow: 
-                inset 0 0 10px rgba(0, 0, 0, 0.9),
-                0 0 8px rgba(255, 150, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: none;
-        }
+  #masGondrongAnimation img.photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;  /* foto lebih kecil */
+    height: 80px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    box-shadow: 0 0 10px 3px rgba(255, 140, 0, 0.8);
+    z-index: 2;
+    pointer-events: auto; /* jika ingin foto bisa diinteraksi */
+  }
 
-        .foto-tengah img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
 
-        /* Animasi tambahan agar gumpalan awan di latar belakang tampak hidup berdenyut */
-        @keyframes denyutAwan {
-            0% { transform: scale(0.95); opacity: 0.7; }
-            100% { transform: scale(1.08); opacity: 1; filter: blur(8px); }
-        }
