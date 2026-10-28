@@ -101,18 +101,6 @@
     <p>Dari kerusakan ringan hingga kerusakan berat. Kami menangani motor matic, bebek, maupun manual.</p>
   </section>
 
-  <!-- TOMBOL NAVIGASI DENGAN TEMA AWAN KOSMIS & API -->
-    <a href="https://mas-gondrong.github.io/Jasa-Pembuatan-Aplikasi/"_blank" class="tombol-api-link" id="tombolApi">
-        <!-- Kanvas Animasi Api WebGL -->
-        <canvas id="canvasApi"></canvas>
-        
-        <!-- Lingkaran Foto Lensa Cembung -->
-        <div class="foto-tengah">
-            <!-- Ganti URL di bawah ini dengan file foto.jpg asli Anda -->
-            <img src="mas_gondrong.jpg" alt="Avatar">
-        </div>
-    </a>
-
   <!-- KONSULTASI SANG MECHANIC -->
   <section class="konsul-mechanic">
     <p class="konsul-title">Konsultasikan kerusakan motor anda dengan</p>
@@ -126,6 +114,14 @@
   </section>
 
 </div>
+
+  <!-- Animasi kecil di pojok bawah -->
+    <a href="https://mas-gondrong.github.io/Jasa-Pembuatan-Aplikasi/" target="_blank" style="display: inline-block;">
+  <div id="masGondrongAnimation" style="cursor: pointer;">
+    <canvas id="fireCanvas" width="100" height="100"></canvas>
+    <img src="mas_gondrong.jpg" alt="Mas Gondrong" class="photo" />
+  </div>
+    </a>
 
 <!-- ============ HALAMAN LAYANAN ============ -->
 <div class="page" id="page-layanan">
@@ -430,140 +426,85 @@
       }
     });
   }
+
+  // --- Logo Mas Gondrong---
+  const canvas = document.getElementById('fireCanvas');
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width;
+  const height = canvas.height;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const radius = 40;
+
+  class FlameParticle {
+    constructor(angle) {
+      this.angle = angle;
+      this.radius = radius + (Math.random() * 7 - 3);
+      this.size = Math.random() * 4 + 3;
+      this.speedAngle = 0.004 + Math.random() * 0.004;
+      this.flameLength = 10 + Math.random() * 10;
+      this.offset = Math.random() * 1000;
+    }
+
+    update(time) {
+      this.angle += this.speedAngle;
+      this.x = centerX + this.radius * Math.cos(this.angle);
+      this.y = centerY + this.radius * Math.sin(this.angle);
+      this.flameProgress = (Math.sin(time / 300 + this.offset) + 1) / 2;
+    }
+
+    draw(ctx) {
+      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
+      grad.addColorStop(0, `rgba(255, 200, 0, ${0.8 * this.flameProgress})`);
+      grad.addColorStop(0.5, `rgba(255, 100, 0, ${0.6 * this.flameProgress})`);
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      const tipX = centerX + (this.radius - this.flameLength * this.flameProgress) * Math.cos(this.angle);
+      const tipY = centerY + (this.radius - this.flameLength * this.flameProgress) * Math.sin(this.angle);
+      ctx.lineTo(tipX, tipY);
+      ctx.lineWidth = this.size / 3;
+      ctx.strokeStyle = `rgba(255, 140, 0, ${0.7 * this.flameProgress})`;
+      ctx.shadowColor = `rgba(255, 140, 0, ${0.9 * this.flameProgress})`;
+      ctx.shadowBlur = 5;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  const particles = [];
+  const particleCount = 20;
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new FlameParticle((i / particleCount) * Math.PI * 2));
+  }
+
+  function animate(time = 0) {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update(time);
+      p.draw(ctx);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Kontrol muncul/hilang animasi saat scroll
+  const anim = document.getElementById('masGondrongAnimation');
+  let scrollTimeout;
+
+  window.addEventListener('scroll', () => {
+    anim.style.opacity = '0';
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      anim.style.opacity = '1';
+    }, 2000);
+  });
 </script>
-  
-<!-- SCRIPT PROGRAM ANIMASI WEBGL SHADER STABIL -->
-  <script>
-        const linkTombol = document.getElementById('tombolApi');
-        const canvas = document.getElementById('canvasApi');
-        
-        // Mengunci opsi alpha transparansi WebGL agar awan jingga di belakangnya terlihat jelas tembus pandang
-        const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
-
-        if (!gl) { alert('WebGL tidak didukung'); }
-
-        const vsSource = `attribute vec2 position; void main() { gl_Position = vec4(position, 0.0, 1.0); }`;
-        const fsSource = `
-            precision mediump float;
-            uniform vec2 u_resolution;
-            uniform float u_time;
-            uniform float u_speed_multiplier;
-
-            vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-            vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-            vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
-
-            float snoise(vec2 v) {
-                const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-                vec2 i  = floor(v + dot(v, C.yy) ); vec2 x0 = v -   i + dot(i, C.xx); vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-                vec4 x12 = x0.xyxy + C.xxzz; x12.xy -= i1; i = mod289(i);
-                vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
-                vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0); m = m*m; m = m*m;
-                vec3 x = 2.0 * fract(p * C.www) - 1.0; vec3 h = abs(x) - 0.5; vec3 ox = floor(x + 0.5); vec3 a0 = x - ox;
-                m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h ); vec3 g; g.x = a0.x * x0.x + h.x * x0.y; g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-                return 130.0 * dot(m, g);
-            }
-
-            void main() {
-                vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);
-                float angle = atan(uv.y, uv.x);
-                float radius = length(uv);
-                
-                float targetSpeed = u_time * 1.3 * u_speed_multiplier;
-                float noiseAngle = angle - targetSpeed;
-                vec2 noiseUV = vec2(cos(noiseAngle), sin(noiseAngle)) * 3.8;
-                
-                float n = snoise(noiseUV + vec2(0.0, u_time * 0.5));
-                n += 0.5 * snoise(noiseUV * 2.0 - vec2(u_time * 0.3, u_time * 0.7));
-                n = n * 0.5 + 0.5;
-
-                float ringMin = 0.16;
-                float ringMax = 0.46;
-                
-                float firePattern = ringMin + n * (ringMax - ringMin);
-                float fireIntensity = smoothstep(firePattern, ringMin - 0.06, radius);
-                fireIntensity *= smoothstep(ringMin, ringMin + 0.04, radius);
-
-                // Peracikan warna api emas menyala terang
-                vec3 colorGold = vec3(1.0, 0.88, 0.2);
-                vec3 colorOrange = vec3(1.0, 0.4, 0.0);
-                vec3 colorRed = vec3(0.85, 0.05, 0.0);
-
-                vec3 finalColor = mix(colorRed, colorOrange, smoothstep(0.1, 0.6, fireIntensity));
-                finalColor = mix(finalColor, colorGold, smoothstep(0.5, 0.9, fireIntensity));
-                finalColor *= fireIntensity * 2.5;
-
-                // Memotong kanvas luar agar transparan penuh mengikuti lekukan lingkaran api
-                float alphaMask = smoothstep(0.48, 0.44, radius);
-                float finalAlpha = min(fireIntensity * 4.0, alphaMask);
-
-                gl_FragColor = vec4(finalColor, finalAlpha);
-            }
-        `;
-
-        function createShader(gl, type, src) {
-            const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
-            return s;
-        }
-        const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
-        const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
-        const prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
-        
-        const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
-        const pos = gl.getAttribLocation(prog, "position"); gl.enableVertexAttribArray(pos); gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-        gl.useProgram(prog);
-
-        const resLoc = gl.getUniformLocation(prog, "u_resolution");
-        const timeLoc = gl.getUniformLocation(prog, "u_time");
-        const speedLoc = gl.getUniformLocation(prog, "u_speed_multiplier");
-
-        let speedMultiplier = 1.0;
-        let targetSpeedMultiplier = 1.0;
-
-        // Listener interaksi klik tombol melesat cepat
-        linkTombol.addEventListener('mousedown', () => targetSpeedMultiplier = 4.5);
-        linkTombol.addEventListener('mouseup', () => targetSpeedMultiplier = 1.0);
-        linkTombol.addEventListener('touchstart', () => targetSpeedMultiplier = 4.5);
-        linkTombol.addEventListener('touchend', () => targetSpeedMultiplier = 1.0);
-
-        function resize() {
-            // Menyesuaikan ukuran piksel kanvas internal
-            const size = 140 * 0.85; 
-            canvas.width = size;
-            canvas.height = size;
-            gl.viewport(0, 0, size, size);
-        }
-        resize();
-
-        // Sistem Auto Hide saat halaman di-scroll
-        let timeoutScroll;
-        window.addEventListener('scroll', () => {
-            linkTombol.classList.add('tersembunyi');
-            clearTimeout(timeoutScroll);
-            timeoutScroll = setTimeout(() => {
-                linkTombol.classList.remove('tersembunyi');
-            }, 1200); 
-        });
-
-        // Loop Animasi Render Utama
-        function render(time) {
-            time *= 0.001;
-            speedMultiplier += (targetSpeedMultiplier - speedMultiplier) * 0.1;
-            gl.uniform2f(resLoc, canvas.width, canvas.height);
-            gl.uniform1f(timeLoc, time);
-            gl.uniform1f(speedLoc, speedMultiplier);
-            
-            gl.enable(gl.BLEND);
-            gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-            gl.clearColor(0.0, 0.0, 0.0, 0.0);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            
-            gl.drawArrays(gl.TRIANGLES, 0, 6);
-            requestAnimationFrame(render);
-        }
-        requestAnimationFrame(render);
-  </script>
 </body>
 </html>
