@@ -763,3 +763,62 @@ body:has(.admin-nav){padding-bottom:70px}
   .sang-text{font-size:72px}
   .mechanic-text{font-size:68px}
   }
+
+        /* ========================================================== */
+        /* EFEK BARU: GUMPALAN AWAN JINGGA KOSMIS (BACKGROUND NEBULA) */
+        /* ========================================================== */
+        .tombol-api-link::before {
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            /* Membuat efek gradasi awan nebula jingga keemasan yang menyala */
+            background: radial-gradient(circle, rgba(255,120,0,0.85) 0%, rgba(200,60,0,0.6) 40%, rgba(100,20,0,0.2) 70%, rgba(0,0,0,0) 100%);
+            z-index: 0;
+            filter: blur(6px); /* Memberikan efek gumpalan awan kabur yang lembut */
+            animation: denyutAwan 4s infinite ease-in-out alternate;
+        }
+
+        /* Kanvas WebGL tempat jilatan api berputar di atas awan jingga */
+        canvas {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            z-index: 1;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        /* WADAH FOTO LUBANG TENGAH (EFEK LENSA CEMBUNG HITAM) */
+        .foto-tengah {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 2;
+            background: #000000; /* Tetap hitam pekat agar efek lensa 3D kaca berkilau maksimal */
+            border: 1px solid rgba(255, 130, 0, 0.5);
+            
+            /* Bayangan dalam (Vignette) pembentuk lensa kaca 3D cembung */
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.9),
+                0 0 8px rgba(255, 150, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .foto-tengah img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Animasi tambahan agar gumpalan awan di latar belakang tampak hidup berdenyut */
+        @keyframes denyutAwan {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            100% { transform: scale(1.08); opacity: 1; filter: blur(8px); }
+        }
