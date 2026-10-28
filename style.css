@@ -781,8 +781,8 @@ body:has(.admin-nav){padding-bottom:70px}
   #fireCanvas {
     position: absolute;
     top: 0; left: 0;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     pointer-events: none;
     z-index: 1;
@@ -801,5 +801,3 @@ body:has(.admin-nav){padding-bottom:70px}
     z-index: 2;
     pointer-events: auto; /* jika ingin foto bisa diinteraksi */
   }
-
-
