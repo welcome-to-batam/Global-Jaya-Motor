@@ -1,7 +1,7 @@
 {
   "name": "Global Jaya Motor",
-  "short_name": "GJMotor",
-  "description": "Dealer motor terpercaya - Cash Kredit DP ringan",
+  "short_name": "GlobalJaya",
+  "description": "Bengkel motor terpercaya - se kota Batam",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
