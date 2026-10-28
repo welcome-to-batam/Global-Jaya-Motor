@@ -769,8 +769,8 @@ body:has(.admin-nav){padding-bottom:70px}
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 100px;  /* ukuran kecil */
-    height: 100px;
+    width: 90px;  /* ukuran kecil */
+    height: 90px;
     pointer-events: none; /* agar tidak menghalangi klik */
     background: transparent;
     z-index: 9999;
