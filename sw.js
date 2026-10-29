@@ -1,4 +1,4 @@
-const CACHE_NAME = "globaljaya-motor-v38";
+const CACHE_NAME = "globaljaya-motor-v39";
 const ASSETS = [
   "./",
   "./index.html",
